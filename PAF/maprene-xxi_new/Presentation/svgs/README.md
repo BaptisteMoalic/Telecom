@@ -1,0 +1,1 @@
+Dossier pour les images en svg

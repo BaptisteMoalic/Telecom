@@ -1,0 +1,953 @@
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesPackage{beamerthemetptng}[2020/08/01 v0.9.2a]
+
+% Utilisation de pgfkeys/pgfopts pour la gestion des options,
+% et définition de raccourcis.
+\RequirePackage{pgfopts}
+\newcommand\tptthemekeys[1]{\pgfqkeys{/tpt theme}{#1}}
+\newcommand\tptthemevalueof[1]{\pgfkeysvalueof{/tpt theme/#1}}
+
+% Besoin de savoir si on compile avec XeLaTeX ou LuaLaTeX,
+% notamment pour la gestion des polices avec fontspec.
+\RequirePackage{iftex}
+\newif\iftptusefontspec
+\tptusefontspecfalse
+\ifluatex\tptusefontspectrue\fi
+\ifxetex\tptusefontspectrue\fi
+
+% On charge le thème infolines (puis on le désactive) pour que ses
+% templates soient disponibles.
+\RequirePackage{beamerouterthemeinfolines}
+\setbeamertemplate{headline}[default]
+\setbeamertemplate{footline}[default]
+\setbeamersize{text margin left=24mm,text margin right=8mm}
+
+% Désactivation de la sidebar par défaut, packages divers.
+\defbeamertemplate*{sidebar right}{tpt default}{}
+\RequirePackage{pgffor}
+\RequirePackage{graphicx}
+\RequirePackage{xcolor}
+
+% Options du package.
+\newif\iftpt@navsymbols\tpt@navsymbolstrue
+\newif\iftpt@titleaffiliation\tpt@titleaffiliationfalse
+\newif\iftpt@footeraffiliation\tpt@footeraffiliationfalse
+\newif\iftpt@textheighthack\tpt@textheighthacktrue
+\tptthemekeys{%
+  %
+  % On définit ici ce que font les options, mais on ne les traitera
+  % qu'à la fin du package : comme la plupart spécifient des macros
+  % ou templates Beamer non encore définis, on attend qu'ils le soient.
+  % Donc ne pas spécifier ici de valeurs par défaut pour celles-là.
+  %
+  % Option official par défaut : pas de symboles de navigation,
+  % logo Télécom avec endossement IP Paris, affiliation IMT dans
+  % la page de titre, pas de nombre total de pages.
+  official/.style={%
+    helvet,nonavsymbols,noslim,framecount=false,logoofficial},
+  logoofficial/.style={footeraffiliation=false,titleaffiliation,logoofficial@},
+  logoofficial@/.code={%
+    \logofootermain*{logo-tp-ipp.pdf}%
+    \logotitle*{logo-tp-ipp.pdf}%
+    \logotitleaffiliation*{logo-IMT.pdf}%
+    \setlength{\footerlogoheight}{0.155\paperheight}%
+    \setlength{\footerlogoyshift}{-1.5pt}%
+  },
+  %
+  % latex : garde les polices et symboles Beamer par défaut.
+  latex/.style={navsymbols,nohelvet,latex@},
+  latex@/.code={\setbeamertemplate{itemize items}[default]},
+  %
+  % visual : utilise un gris plus foncé pour les boîtes et sous-titre.
+  visual/.code={%
+    \colorlet{tptgray}{black!60}%
+    {\usebeamercolor{title in head/foot}}% Needed to reset frame title frieze.
+  },
+  %
+  % slim : réduit l'encombrement vertical des frames.
+  slim/.style={alignframetitle=baseline,slim@},
+  slim@/.code={%
+    \setlength{\tptframetitlefriezesep}{%
+      \dimexpr \baselineskip - \tptframetitlefriezeheight \relax}%
+    \tptcalculateheadfoot
+  },
+  noslim/.code={%
+    \setlength{\tptframetitlefriezesep}{0.112\paperheight}%
+    \tptcalculateheadfoot
+  },
+  %
+  % infolines : affiche les sections en en-tête.  Utilise l'option slim.
+  infolines/.style={slim,infolines@},
+  infolines@/.code={%
+    \setbeamertemplate{headline}[infolines theme]%
+    \tptheadlineplumb
+    \tptcalculateheadfoot
+  },
+  %
+  % Symboles de navigation.  En plus de les activer ou les désactiver,
+  % on peut les aligner latéralement (met le contenu de "navsymbols align"
+  % comme option de la beamercolorbox qui contient les symboles).
+  navsymbols/.is choice,
+  navsymbols/.default=left,
+  navsymbols/left/.style={navsymbols enable,navsymbols align=left},
+  navsymbols/right/.style={navsymbols enable,navsymbols align=right},
+  navsymbols/center/.style={navsymbols enable,navsymbols align=center},
+  navsymbols align/.store in=\tpt@navsymbols@align,
+  navsymbols align={},
+  navsymbols enable/.code={%
+    \setbeamertemplate{navigation symbols}[default]%
+    \tpt@navsymbolstrue
+    \tptcalculateheadfoot
+  },
+  nonavsymbols/.code={%
+    \setbeamertemplate{navigation symbols}{}%
+    \tpt@navsymbolsfalse
+    \tptcalculateheadfoot
+  },
+  %
+  % Logos et affiliations.  Ces options contrôlent les logos de
+  % pied de page et de la page de titre.
+  titleaffiliation/.is if=tpt@titleaffiliation,
+  footeraffiliation/.is if=tpt@footeraffiliation,
+  logosaclay/.style={logoofficial,footeraffiliation,logosaclay@},
+  logosaclay@/.code={%
+    \logofooteraffiliation*{logo-upsay-e.pdf}%
+    \logotitleaffiliation*{logo-upsay-violet.pdf}%
+    \tptcalculateheadfoot
+  },
+  %
+  % logoipp, pour la compatibilité ascendante, sépare les logos
+  % Télécom et IP Paris.
+  logoipp/.style={footeraffiliation,logoipp@},
+  logoipp@/.code={%
+    \logofootermain*{logo-tp.pdf}%
+    \logofooteraffiliation*{logo-IPP-small.pdf}%
+    \setlength{\footerlogoheight}{.05118\paperwidth}%
+    \setlength{\footerlogoyshift}{0pt}%
+    \tptcalculateheadfoot
+  },
+  %
+  % logotp, on ne laisse l'affiliation que sur la page
+  % de titre. Le pied de page ne gardant que le logo de
+  % Télécom sans celui de l'IP Paris
+  logotp/.style={footeraffiliation=false,logotp@},
+  logotp@/.code={%
+    \logofootermain*{logo-tp.pdf}%
+    \setlength{\footerlogoheight}{.05118\paperwidth}%
+    \setlength{\footerlogoyshift}{0pt}%
+    \tptcalculateheadfoot
+  },
+  %
+  % Police Helvetica (ou non, auquel cas on restaure la police sans serif).
+  % L'argument optionnel de helvet, pour LuaTeX et XeTeX, est la liste des
+  % polices à chercher dans le système à la place de Helvetica, car il n'y
+  % en a pas de standard.
+  helvet/.code={%
+    \edef\tpt@helvet@searchlist{#1}%
+    \tpt@activatehelvet},
+  helvet/.default={Helvetica,TeX Gyre Heros,Nimbus Sans L,Arial},
+  nohelvet/.code={\tpt@restoresans},
+  %
+  % Affichage du nombre total de pages (framecount), éventuellement
+  % sans tenir compte des annexes (bodyframecount), avec le nº de page.
+  framecount/.is choice,
+  framecount/false/.code={\setbeamertemplate{page in head/foot}[plain]},
+  framecount/true/.code={\setbeamertemplate{page in head/foot}[total]},
+  framecount/body/.code={\setbeamertemplate{page in head/foot}[body]},
+  framecount/.default=true,% "framecount" seul veut dire "framecount=true".
+  bodyframecount/.style={framecount=body},
+  %
+  % Alignement du titre de frame sur la frise.  Peut se faire sur
+  % la 1re ou la dernière ligne du titre (alignframetitle=baseline,
+  % ou =bottom baseline), ou le dessous du titre (=bottom), ou la
+  % dernière ligne ou le dessous du sous-titre (=subtitle bottom baseline,
+  % =subtitle bottom).
+  alignframetitle/.style={%
+    alignframetitle@template=#1,
+    frame title yshift=0pt,
+    frame title yshift if subtitle=0pt,
+  },
+  alignframetitle/.value required,
+  alignframetitle@template/.code={%
+    \setbeamertemplate{frametitle content box}[#1]%
+  },
+  alignframetitle@template/.value required,
+  %
+  % Alias pour ceux qui trouvent plus lisibles les espaces dans les options.
+  align frametitle/.style={alignframetitle=#1},
+  align frame title/.style={alignframetitle=#1},
+  %
+  % Ajustements fins de l'alignement du titre de frame :
+  % frametitleyshift=<dimension> décale le titre vers le haut,
+  % frametitleyshiftifsubtitle=<dimension> idem mais uniquement
+  % s'il y a un sous-titre.  Des alias avec espaces sont fournis.
+  % Par défaut frametitleyshiftifsubtitle=8pt (défini plus bas).
+  frametitleyshift/.code={%
+    \setlength{\tptframetitleyshift}{#1}},
+  frametitleyshift/.value required,
+  frametitle yshift/.style={frametitleyshift=#1},
+  frame title yshift/.style={frametitleyshift=#1},
+  frametitleyshiftifsubtitle/.code={%
+    \setlength{\tptframetitleyshiftifsubtitle}{#1}},
+  frametitleyshiftifsubtitle/.value required,
+  frametitle yshift if subtitle/.style={frametitleyshiftifsubtitle=#1},
+  frame title yshift if subtitle/.style={frametitleyshiftifsubtitle=#1},
+  %
+  % Active/désactive un hack de la headline pour retirer
+  % (approximativement) la taille du titre du frame de \textheight.
+  % À désactiver quand on change le template de la headline.
+  textheighthack/.is choice,
+  textheighthack/.default=true,
+  textheighthack/true/.code={%
+    \tpt@textheighthacktrue
+    \tptcalculateheadfoot
+  },
+  textheighthack/false/.code={%
+    \tpt@textheighthackfalse
+    \tptcalculateheadfoot
+  },
+}
+% \ProcessPgfOptions à la fin du package, après les définitions.
+
+\mode<presentation>
+
+%
+% Définition de longueurs.
+%
+
+% Une macro pour aider.
+\newcommand*\tpt@deflength[2]{\newlength{#1}\setlength{#1}{#2}}
+
+% Taille des logos dans la page de titre.
+\tpt@deflength{\titlelogowidth}{0.142\paperwidth}
+\tpt@deflength{\titleaffiliationlogowidth}{0.11\paperwidth}
+
+% Taille des logos en bas de page.
+\tpt@deflength{\footerlogomargin}{0.018\paperwidth}% Marge horizontale droite.
+\tpt@deflength{\footerlogoheight}{0.155\paperheight}% Hauteur des logos.
+
+%
+% Déclaration des logos.
+%
+
+% Macro auxiliaire pour définir une macro de définition de logo pouvant
+% utiliser \includegraphics ou du code arbitraire :
+% \tpt@deflogographics{CeNom}{espace}{arg-défaut} définit
+% \logoCeNom*[arg-défaut]{contenu (nom de fichier)} et
+% \logoCeNom{contenu (code brut)}, lesquelles définissent
+% \insertlogoCeNom = soit le code brut (pour \logoCeNom),
+% soit \hspace*{espace}\includegraphics[arg-défaut]{contenu (nom de fichier)}
+% (pour \logoCeNom*).
+%
+% De plus, \tpt@deflogographics* fait la même chose mais en utilisant
+% une définition globale (avec \gdef) alors que \tpt@deflogographics
+% fait des définitions locales (avec \def).
+
+\newcommand*\tpt@deflogographics{%
+  \@ifstar{\tpt@deflogographics@def{\gdef}}{\tpt@deflogographics@def{\def}}%
+}
+\newcommand*\tpt@deflogographics@def[4]{%
+  %
+  % Différenciation entre \nomdulogo et \nomdulogo*.
+  \expandafter\def\csname logo#2\endcsname{%
+    \@ifstar{%
+      \csname tpt@logo@#2@graphics\endcsname}{%
+      \csname tpt@logo@#2\endcsname}%
+  }%
+  %
+  % \nomdulogo*{...} est prise en charge par \tpt@nomdu@logo,
+  % laquelle définit directement \insertnomdulogo à {...}.
+  \expandafter\newcommand\csname tpt@logo@#2\endcsname[1]{%
+    % Ici #1 est le paramètre de la macro externe, donc \def ou \gdef ;
+    % et ##1 est le paramètre qu'on donne à \nomdulogo, donc le contenu.
+    \expandafter #1\csname insertlogo#2\endcsname{##1}%
+  }%
+  %
+  % \nomdulogo[arg]{...} est prise en charge par \tpt@nomdu@logo@graphics,
+  % laquelle relaie à \tpt@nomdu@logo, avec pour contenu :
+  % l'espace donné dans #3 + \includegraphics.
+  \expandafter\newcommand\csname tpt@logo@#2@graphics\endcsname[2][#4]{%
+    \csname tpt@logo@#2\endcsname{%
+      \hspace*{#3}\includegraphics[##1]{##2}%
+    }%
+  }%
+}
+
+%
+% Logos de la page de titre : principal et éventuellement extra au-dessus.
+\tpt@deflogographics{title}{0pt}{width=\titlelogowidth}
+\logotitle{}
+\tpt@deflogographics{titleextra}{0pt}{width=\titlelogowidth}
+\logotitleextra{}
+
+% Pour positionner ce logo par rapport au coin supérieur gauche.
+\newcommand\logoskipv{.12\paperheight}
+\newcommand\logoskiph{.10\paperwidth}
+
+% Logo de l'affiliation.
+\tpt@deflogographics{titleaffiliation}{0pt}{width=\titleaffiliationlogowidth}
+\logotitleaffiliation{}
+
+%
+% Logos de bas de page : principal et éventuellement affiliation supplémentaire.
+\tpt@deflogographics{footermain}{0pt}{height=\footerlogoheight}
+\logofootermain{}
+\tpt@deflogographics{footeraffiliation}{1em}{height=\footerlogoheight}
+\logofooteraffiliation{}
+
+% Ensemble des logos de bas de page.
+\logo{%
+  \insertlogofootermain
+  \iftpt@footeraffiliation\insertlogofooteraffiliation\fi
+}
+
+%
+% Couleurs et polices.
+%
+
+\definecolor{tptred}{RGB}{191,18,56} 
+\definecolor{tptbrown}{RGB}{109,80,71}
+\colorlet{tptgray}{black!30}
+
+\setbeamercolor{frametitle}{fg=tptred,bg=white}
+\setbeamercolor{structure}{fg=tptred}
+\setbeamercolor{title}{bg=white,fg=black}
+\setbeamercolor{subtitle}{bg=white,fg=tptgray}
+\setbeamercolor{author in title frame}{bg=white,fg=tptgray}
+\setbeamercolor{mail in title frame}{bg=white,fg=tptgray}
+\setbeamercolor{date in title frame}{bg=white,fg=tptgray}
+\setbeamercolor{page in head/foot}{fg=white,bg=tptred}
+\setbeamercolor{date in head/foot}{parent=page in head/foot}
+\setbeamercolor{institute in head/foot}{fg=white,bg=black}
+\setbeamercolor{author in head/foot}{fg=white,bg=tptbrown}
+\setbeamercolor{section in head/foot}{bg=white,fg=tptred}
+\setbeamercolor{subsection in head/foot}{bg=white,fg=tptbrown}
+\setbeamercolor{title in head/foot}{fg=white,bg=tptgray}
+\setbeamercolor{block title}{parent=structure,bg=normal text.bg!75!tptbrown}
+\setbeamercolor{block body}{bg=normal text.bg!98!tptbrown}
+\setbeamercolor{block title alerted}{use={normal text,alerted text},fg=alerted text.fg!75!normal text.fg,bg=normal text.bg!75!tptred}
+\setbeamercolor{block body alerted}{bg=normal text.bg!95!tptred}
+\setbeamercolor{itemize subitem}{fg=tptbrown}
+
+
+\setbeamerfont{title}{size*={17}{20},series=\bfseries}
+\setbeamerfont{subtitle}{size*={9.5}{12},series=\bfseries}
+\setbeamerfont{author in title frame}{size*={9.5}{12}, family=\sffamily}
+\setbeamerfont{email in title frame}{size*={8}{10},family=\ttfamily}
+\setbeamerfont{date in title frame}{size*={8}{10}, family=\sffamily}
+\setbeamerfont{date in head/foot}{size*={4}{5},family=\sffamily}
+\setbeamerfont{page in head/foot}{size*={5}{6},family=\sffamily}
+\setbeamerfont{institute in head/foot}{size*={5}{6},family=\sffamily}
+\setbeamerfont{author in head/foot}{size*={5}{6},family=\sffamily}
+\setbeamerfont{frametitle}{size*={12.5}{16},series=\bfseries}
+
+%
+% \tptfrieze[baseline]{largeur}{hauteur}{couleur1,couleur2,...,couleurN}
+% génère une frise de N rectangles, chacun de la baseline, largeur,
+% hauteur et couleur spécifiées.
+%
+% Sert pour la page de titre et le titre des frames.
+%
+\newcommand*\tptfrieze[4][0pt]{%
+  \foreach \tpt@color in {#4} {%
+    \textcolor{\tpt@color}{\rule[#1]{#2}{#3}}%
+  }%
+}
+
+%
+% Police : officiellement Dinot ou Arial, pour nous ce sera soit
+% Helvetica ou équivalent, soit laisser les polices LaTeX et
+% laisser faire l'utilisateur.  Difficulté : si on utilise fontspec,
+% il n'y a pas d'équivalent complètement standard de Helvetica.
+%
+% Fonctionnement : deux macros, \tpt@activatehelvet et \tpt@restoresans.
+% Dans le préambule, elles ne font qu'activer ou désactiver un flag qui
+% reporte leur action au début du document.  Ensuite, \tpt@activatehelvet
+% sauvegarde la police sans serif, et sélectionne une police équivalente
+% à Helvetica (après l'avoir définie au besoin).  \tpt@restoresans
+% restaure la police sans serif.
+
+% Flag et macro de sauvegarde.
+\newif\iftpt@helvetatbegindocument
+\let\tpt@save@sfdefaultfamily=\@empty
+\let\tpt@helvet@family=\@empty
+
+% Chargement des packages adéquats : fontspec si le moteur LaTeX le
+% supporte, sinon helvet en sauvant préalablement la police sans serif.
+\iftptusefontspec
+  \RequirePackage{fontspec}
+\else
+  \let\tpt@save@sfdefaultfamily=\sfdefault
+  \RequirePackage{helvet}
+  \let\sfdefault=\tpt@save@sfdefaultfamily
+  \def\tpt@helvet@family{phv}
+\fi
+
+% Définitions avant le \begin{document}
+\newcommand*\tpt@activatehelvet{\tpt@helvetatbegindocumenttrue}
+\newcommand*\tpt@restoresans{\tpt@helvetatbegindocumentfalse}
+
+% Définitions après le \begin{document}
+\newcommand*\tpt@activatehelvet@real{%
+  \ifx\tpt@helvet@family\@empty
+    % On doit encore définir la police pour Helvetica.
+    % Ce cas ne se présente qu'avec fontspec, car autrement
+    % la macro \tpt@helvet@family est initialisée ci-dessus.
+    \tptfindfont{tpthelvetlike}{\tpt@helvet@searchlist}%
+    \ifx\tpthelvetlikefont\@empty
+      % Pas trouvé, on reste sur une police LaTeX.
+      \PackageWarning{beamerthemetptng}{Did not find an Arial-like font.}%
+      \let\tpt@helvet@family=\sfdefault
+    \else
+      \def\tpt@helvet@family{tpthelvetlike}%
+    \fi
+  \fi
+  \let\tpt@save@sfdefaultfamily=\sfdefault
+  \let\sfdefault=\tpt@helvet@family
+  \normalfont
+}
+\newcommand*\tpt@restoresans@real{%
+  \ifx\tpt@save@sfdefaultfamily\@empty
+  \else
+    % La macro de sauvegarde n'est pas vide, on peut restaurer la police.
+    \let\sfdefault=\tpt@save@sfdefaultfamily
+    \let\tpt@save@sfdefaultfamily=\@empty
+    \normalfont
+  \fi
+}
+
+% Définir une police : on parcourt une liste donnée jusqu'à trouver
+% la première qui existe.  Ne fonctionne qu'avec fontspec.
+\newcommand*\tptfindfont[2]{%
+  \PackageError{beamerthemetptng}{%
+    \string\tptfindfont{} requires LuaTeX or XeTeX}{%
+    This macro requires package fontspec,
+    which only works with LuaTeX or XeTeX.
+  }%
+}
+\iftptusefontspec
+  \renewcommand*\tptfindfont[2]{%
+    \let\tpt@foundfont=\@empty
+    \edef\tpt@tmp@fontsearchlist{#2}%
+    \foreach \tpt@findfont in \tpt@tmp@fontsearchlist {%
+      \IfFontExistsTF{\tpt@findfont}{%
+        \xdef\tpt@foundfont{\tpt@findfont}%
+        \breakforeach}{}%
+    }%
+    \ifx\tpt@foundfont\@empty
+      \@namedef{#1font}{}%
+    \else
+      \expandafter\newfontfamily\csname #1font\endcsname{\tpt@foundfont}[%
+        NFSSFamily=#1]%
+    \fi
+  }
+\fi
+
+% Au début du document, on change les définitions, et on invoque
+% \tpt@activatehelvet si le flag était activé.
+\AtBeginDocument{%
+  \let\tpt@activatehelvet=\tpt@activatehelvet@real
+  \let\tpt@restoresans=\tpt@restoresans@real
+  \iftpt@helvetatbegindocument
+    \tpt@activatehelvet
+  \fi
+}
+
+
+%
+% Page de titre.
+%
+\defbeamertemplate*{title page}{tpt default}%
+{%
+   \begin{columns}
+   \begin{column}{.4\paperwidth}
+      \begin{minipage}[t][\paperheight][t]{\textwidth}%
+         \vspace{\logoskipv}\par%
+         \hspace{\logoskiph}\insertlogotitle\par%
+         \vspace{4mm}%
+         \hspace{\logoskiph}\usebeamercolor[fg]{title}\usebeamerfont{title}{%
+            \insertlogotitleextra
+         }\par%
+         \vfill{}\vfill{}%
+         \iftpt@titleaffiliation
+         \hspace*{\logoskiph}\insertlogotitleaffiliation
+         \vspace{.18\paperheight}%
+         \fi
+      \end{minipage}
+   \end{column}
+   \begin{column}{.6\paperwidth}
+      \hspace{.03\textwidth}%
+      \begin{minipage}[t][.55\paperheight][t]{.9\textwidth}
+         \vspace{2cm}%
+         \usebeamercolor[fg]{title}\usebeamerfont{title}\raggedright{\inserttitle}\par%
+         \ifx\insertsubtitle\@empty%
+         \else%
+         {%
+            \vspace{1ex}%
+            \usebeamercolor[fg]{subtitle}\usebeamerfont{subtitle}\raggedright{\insertsubtitle}\par
+            \vfill
+         }%
+         \fi%
+      \end{minipage}%
+      \vspace{.1\paperheight}\par%
+      \hspace{.03\textwidth}%
+      \begin{minipage}[b][.1\paperheight][b]{.9\textwidth}
+         \usebeamercolor[fg]{author in title frame}\usebeamerfont{author in title frame}\insertauthor\par%
+         \usebeamercolor[fg]{email in title frame}\usebeamerfont{email in title frame}\insertemail\par%
+         \usebeamercolor[fg]{date in title frame}\usebeamerfont{date in title frame}\insertdate\par%
+      \end{minipage}%
+      \vspace{.03\paperheight}\par%
+      \begin{beamercolorbox}[sep=0cm,wd=.6\paperwidth]{title}
+        \tptfrieze{.205\paperwidth}{.0427\paperheight}{%
+          page in head/foot.bg,institute in head/foot.bg,title in head/foot.bg}
+      \end{beamercolorbox}%
+      \vspace{.20\paperheight}%
+   \end{column}
+   \end{columns}
+}%
+
+\def\maketitle{%
+ {
+  \ifbeamer@inframe
+    \titlepage
+  \else
+    \begin{frame}[plain]
+      \titlepage
+    \end{frame}
+  \fi
+ }
+}
+
+
+%
+% Bas de page : boîtes de couleur et logo.
+%
+% On commence par définir :
+% * les dimensions ;
+% * une macro générique pour faire une boîte ;
+% * deux macros spécialisées pour les boîtes selon qu'elles sont centrées
+%   ou alignées verticalement, avec la baseline en bas de la boîte ;
+% * une macro qui pointe vers l'une ou l'autre des macros spécialisées,
+%   changeable par une option du package.
+%
+
+\tpt@deflength{\footlinespacing}{0.008\paperwidth}
+\tpt@deflength{\tptbottomboxsep}{\footlinespacing}
+\tpt@deflength{\tptbottomboxesmargin}{0.01778\paperheight}
+\tpt@deflength{\tptleftbottomboxwidth}{0.154\paperwidth}
+\tpt@deflength{\tptmidbottomboxwidth}{0.276\paperwidth}
+\tpt@deflength{\tptbottomboxesbase}{0.00889\paperheight}
+\tpt@deflength{\tptbottomboxesheight}{0.0338\paperheight}
+\tpt@deflength{\footerlogoyshift}{-1.5pt}
+
+
+% Macros génériques et spécialisées pour faire une boîte.
+% Paramètres : [options beamercolorbox], couleur Beamer, contenu.
+\newcommand*\tpt@bottombox[3]{%
+  \begin{beamercolorbox}[center,#1]{#2}
+    \usebeamerfont*{#2}%
+    #3
+  \end{beamercolorbox}%
+}
+\newcommand*\tpt@bottombox@centered[4][]{%
+  \tpt@bottombox{wd={#3},#1}{#2}{%
+    \vbox to\tptbottomboxesheight{\vfil#4\vfil}%
+  }%
+}
+\newcommand*\tpt@bottombox@aligned[4][]{%
+  \raisebox{\tptbottomboxesbase}{%
+    \tpt@bottombox{wd={#3},dp=\tptbottomboxesbase,ht={%
+        \dimexpr \tptbottomboxesheight - \tptbottomboxesbase \relax},#1}{#2}{%
+      #4%
+    }%
+  }%
+}
+\let\tptbottombox=\tpt@bottombox@aligned
+
+% Macro pour faire l'ensemble des boîtes de bas de page.
+% Paramètre : la largeur totale (pour ajuster la dernière boîte).
+\newcommand*\tptbottomboxes[1]{%
+  \setlength\@tempdima{#1}%
+  \leavevmode
+  \tptbottombox{page in head/foot}{\tptleftbottomboxwidth}{%
+    \usebeamertemplate{page in head/foot}%
+    \ifx\insertshortdate\@empty
+    \else\hfill\usebeamerfont{date in head/foot}\insertshortdate
+    \fi
+  }%
+  \hspace*{\tptbottomboxsep}%
+  \tptbottombox{institute in head/foot}{\tptmidbottomboxwidth}{%
+    \insertinstitute
+  }%
+  \hspace*{\tptbottomboxsep}%
+  \tptbottombox{title in head/foot}{%
+    \dimexpr \@tempdima - \tptleftbottomboxwidth - \tptmidbottomboxwidth
+    - 2\tptbottomboxsep - \footerlogomargin \relax}{%
+    \insertshorttitle
+  }%
+}
+
+% Templates pour le nº de page.
+\defbeamertemplate*{page in head/foot}{plain}{%
+  % Juste le nº.
+  \insertframenumber
+}
+\defbeamertemplate{page in head/foot}{total}{%
+  % Avec le nombre total de pages.
+  \insertframenumber/\inserttotalframenumber
+}
+\defbeamertemplate{page in head/foot}{body}{%
+  % Avec le nombre de pages hors annexe (défini plus bas).
+  \insertframenumber/\insertbodyframenumber
+}
+
+%
+% Le bas de page proprement dit : les boîtes et le logo dans la footline.
+% Le logo est typesetté dans une boîte pour calculer sa largeur et
+% ajuster la taille des boîtes via le paramètre de \tptbottomboxes.
+%
+\newsavebox\tpt@tempbox
+\defbeamertemplate*{footline}{tpt default}{%
+  %
+  % On commence par typesetter le logo pour calculer la largeur restante.
+  \sbox\tpt@tempbox{\insertlogo}%
+  \setlength\@tempdima{\dimexpr \paperwidth - \wd\tpt@tempbox \relax}%
+  %
+  % Une petite marge verticale entre le corps du texte et le bas de page.
+  \vskip 2pt%
+  %
+  % Symboles de navigation si besoin.
+  \iftpt@navsymbols
+  \begin{beamercolorbox}%
+    [wd=\@tempdima,\tpt@navsymbols@align]{navigation symbols}
+    \usebeamertemplate***{navigation symbols}%
+  \end{beamercolorbox}
+  \fi
+  %
+  % Les boîtes de bas de page et le logo.
+  \mbox{%
+    \tptbottomboxes{\@tempdima}%
+    \hspace*{\footlinespacing}%
+    \hfill%
+    \smash{\raisebox{\footerlogoyshift}{\usebox{\tpt@tempbox}}}%
+  }%
+  %
+  % Marge verticale avec le bord inférieur de la page.
+  \vskip\tptbottomboxesmargin%
+}
+
+
+
+%%%% En tête
+
+% Macro spéciale pour ajouter la hauteur (prédéfinie) du titre du frame
+% dans la headline, si le hack de textheight est activé.
+\newcommand*\tptheadlineplumb{%
+  \addtobeamertemplate{headline}{}{%
+    \iftpt@textheighthack
+    \vskip\tptframetitlefriezesep
+    \fi
+  }%
+}
+\tptheadlineplumb
+
+%
+% Titre du frame : dimensions.
+%
+\tpt@deflength{\tptframetitlesep}{0.018\paperwidth}
+\tpt@deflength{\tptframetitlefriezesep}{0.112\paperheight}
+\tpt@deflength{\tptframetitlefriezewidth}{0.153\paperwidth}
+\tpt@deflength{\tptframetitlefriezeheight}{0.032\paperheight}
+\tpt@deflength{\tptframetitleyshift}{0pt}
+\tpt@deflength{\tptframetitleyshiftifsubtitle}{8pt}% FIXME
+\tpt@deflength{\tptframetitledepth}{2.1mm}%          FIXME
+\newlength{\tpt@frametitle@width}
+\newlength{\tpt@frametitle@content@width}
+
+%
+% Titre du frame : beamercolorbox standard incluant la frise,
+% et un template interne qui gère les options d'alignement
+% de l'ensemble titre + sous-titre.
+%
+\defbeamertemplate*{frametitle}{tpt default}[1][]{%
+  \tptthemekeys{#1}% Active les options données (comme pour le package).
+  \nointerlineskip%  On ne saute pas de ligne après l'en-tête...
+  \iftpt@textheighthack% ... voire on compense le saut de la headline.
+  \ifbeamer@plainframe\else
+  \vskip-\tptframetitlefriezesep
+  \fi\fi
+  %
+  % La beamercolorbox prend tout le frame (moins les éventuelles sidebars).
+  \setlength{\tpt@frametitle@width}{%
+    \dimexpr \textwidth + \beamer@leftmargin + \beamer@rightmargin \relax}%
+  \begin{beamercolorbox}[sep=0pt,wd=\the\tpt@frametitle@width]{frametitle}
+    %
+    % La frise, avec une \rule invisible pour la marge verticale,
+    % et un arrière-plan blanc s'il y a une couleur de fond.
+    % FIXME mieux gérer couleur et marge p.ex. avec une autre beamercolorbox.
+    \mbox{%
+      \rule{0pt}{%
+        \dimexpr \tptframetitlefriezeheight + \tptframetitlefriezesep \relax}%
+      \ifbeamercolorempty[bg]{frametitle}{}{%
+        \rlap{\textcolor{white}{%
+            \rule[-1pt]{%
+              \dimexpr \tptframetitlefriezewidth + 1pt}{%
+              \dimexpr \tptframetitlefriezeheight + 2pt}%
+      }}}%
+      \tptfrieze{%
+        0.333\tptframetitlefriezewidth}{\tptframetitlefriezeheight}{%
+        page in head/foot.bg,institute in head/foot.bg,title in head/foot.bg}%
+    }%
+    \hspace*{\tptframetitlesep}%
+    %
+    % On ajoute une profondeur minimale s'il y a une couleur de fond.
+    \ifbeamercolorempty[bg]{frametitle}{}{%
+      \rule[-\tptframetitledepth]{0pt}{0pt}%
+    }%
+    %
+    % On décale la baseline de la hauteur demandée,
+    % notamment s'il y a un sous-titre.
+    \setlength{\@tempdima}{\tptframetitleyshift}%
+    \ifx\insertframesubtitle\@empty
+    \else
+    \addtolength{\@tempdima}{\tptframetitleyshiftifsubtitle}%
+    \fi
+    %
+    % Le template interne, à qui on précalcule sa largeur.
+    \setlength{\tpt@frametitle@content@width}{%
+      \dimexpr \tpt@frametitle@width
+      - \tptframetitlefriezewidth - \tptframetitlesep
+      - \beamer@rightmargin \relax}%
+    \raisebox{\@tempdima}{\usebeamertemplate{frametitle content box}}%
+  \end{beamercolorbox}%
+}
+
+%
+% Pour le contenu du titre du frame, définissons des macros auxiliaires.
+%
+
+% Crée une \vbox alignée sur le dessous de son contenu
+% et non sur la baseline de celui-ci.
+\newcommand\tpt@bottomalignedbox[1]{%
+  \vbox{#1\nointerlineskip\vbox{}}%
+}
+
+% \tpt@framecontentbox{vbox}{align1}{pos1}{titre}{align2}{pos2}{sous-titre}
+% génère la boîte contenant titre et sous-titre du frame, en l'alignant
+% selon les paramètres :
+% * "vbox" : \vbox (aligne le sous-titre) ou \vtop (aligne titre) ;
+% * "align[12]" : vides (pour baseline) ou \tpt@bottomalignbox (pour dessous) ;
+% * "pos[12]" sont passés aux \parbox qui contiennent titre/sous-titre.
+%
+\newcommand\tpt@framecontentbox[7]{%
+  #1{%
+    #2{\hbox{\parbox[#3]{\tpt@frametitle@content@width}{%
+          \usebeamerfont{frametitle}%
+          \raggedright\noindent
+          #4\par
+    }}}%
+    \nointerlineskip
+    \ifx\insertframesubtitle\@empty%
+    \else
+      #5{\hbox{\parbox[#6]{\tpt@frametitle@content@width}{%
+          \usebeamerfont{framesubtitle}%
+          \usebeamercolor[fg]{framesubtitle}%
+          \raggedright
+          #7\par
+      }}}%
+    \fi
+  }
+}
+
+% Maintenant les variantes du template contenu, selon l'alignement désiré.
+\defbeamertemplate*{frametitle content box}{baseline}{%
+  \tpt@framecontentbox{\vtop}%
+                      {}{t}{\strut\insertframetitle\strut}%
+                      {}{}{\insertframesubtitle\strut}%
+}
+\defbeamertemplate{frametitle content box}{bottom baseline}{%
+  \tpt@framecontentbox{\vtop}%
+                      {}{b}{\strut\insertframetitle\strut}%
+                      {}{}{\insertframesubtitle\strut}%
+}
+\defbeamertemplate{frametitle content box}{bottom}{%
+  \tpt@framecontentbox{\vtop}%
+                      {\tpt@bottomalignedbox}{b}{\insertframetitle}%
+                      {}{}{\insertframesubtitle\strut}%
+}
+\defbeamertemplate{frametitle content box}{subtitle bottom baseline}{%
+  \tpt@framecontentbox{\vbox}%
+                      {}{}{\strut\insertframetitle\strut}%
+                      {}{b}{\insertframesubtitle\strut}%
+}
+\defbeamertemplate{frametitle content box}{subtitle bottom}{%
+  \tpt@framecontentbox{\vbox}%
+                      {}{}{\strut\insertframetitle\strut}%
+                      {\tpt@bottomalignedbox}{b}{\insertframesubtitle}%
+}
+
+% Aliases des options sans les espaces (parce que LaTeX les supprime).
+\newcommand*\tpt@frametitle@defalias[2]{%
+  \defbeamertemplatealias{frametitle content box}{#1}{#2}%
+}
+\tpt@frametitle@defalias{bottombaseline}{bottom baseline}
+\tpt@frametitle@defalias{subtitlebottombaseline}{subtitle bottom baseline}
+\tpt@frametitle@defalias{subtitlebottom}{subtitle bottom}
+
+%
+% Itemize labels.
+%
+\defbeamertemplate*{itemize item}{tpt}{%
+  \raise0.2ex\hbox{\vrule width 1ex height 1ex}%
+}
+\defbeamertemplate*{itemize subitem}{tpt}{\textbullet}
+\defbeamertemplate*{itemize subsubitem}{tpt}{\textendash}
+
+%
+% \bodyframecount : nº du dernier frame hors annexe.
+%
+\newcommand\insertbodyframenumber{1}  % On démarre au frame 1.
+\newif\ifinappendix\inappendixfalse   % Flag positionné par \appendix...
+\let\save@beamer@appendix=\appendix   % ... ce pour quoi on modifie \appendix.
+\renewcommand\appendix{%
+  %
+  % On sauve le nº du frame : c'est le dernier frame hors annexe.
+  %
+  \immediate\write\@auxout{\string\@writefile{nav}%
+    {\noexpand\headcommand{\noexpand\def\noexpand\insertbodyframenumber{\the\c@framenumber}}}}
+  \save@beamer@appendix
+  \inappendixtrue
+}
+\AtEndDocument{%
+  %
+  % S'il n'y a pas d'annexe, on sauve le nº du dernier frame.
+  %
+  \ifinappendix
+  \else
+  \immediate\write\@auxout{\string\@writefile{nav}%
+    {\noexpand\headcommand{\noexpand\def\noexpand\insertbodyframenumber{\the\c@framenumber}}}}
+  \fi
+}
+
+%
+% Macro pour recalculer la hauteur des haut et bas de page.
+% On ne l'active qu'à la fin du préambule.
+%
+\newcommand*\tptcalculateheadfoot{}
+\AtBeginDocument{%
+  \renewcommand*\tptcalculateheadfoot{\beamer@calculateheadfoot}%
+}
+
+% .. from tptthemtheme?
+% Contents frame (FIXME part frame option).
+%
+\providecommand*\contentsframe[1][]{%
+  \begin{frame}
+    \frametitle{\contentsframename}
+    \tableofcontents[#1]
+  \end{frame}
+}
+\providecommand*\contentsframename{\contentsname}
+\providecommand*\contentsname{Outline}% In case Babel not loaded.
+
+%
+% Métadonnées supplémentaires pour compatibilité ascendante :
+% \email, \dept (alias de \institute).
+%
+\newcommand\email[1]{\gdef\insertemail{#1}}
+\email{}
+\newcommand\dept[1]{\institute{#1}}
+
+%
+% On répare un bug de certaines versions de Beamer, qui pose problème
+% avec les marges par défaut.  (Code dérivé de beamerbasecolor.sty.)
+%
+\@tempswafalse
+\@ifclasslater{beamer}{2017/08/22}{\@tempswatrue}{}
+\@ifclasslater{beamer}{2020/07/25}{\@tempswafalse}{}
+\if@tempswa
+\renewenvironment{beamercolorbox}[2][]{%
+  \def\beamer@vmode{\leavevmode}%
+  \setkeys{beamercolbox}{wd=\textwidth,ht={},dp={},%
+    leftskip=0pt,rightskip=0pt plus1fil,%
+    sep=0pt,colsep=0pt,colsep*=0pt,%
+    shadow=false,rounded=false,ignorebg=false}%
+  \setkeys{beamercolbox}{#1}%
+  \ifbeamercolorempty[bg]{#2}{\@tempswafalse}{\@tempswatrue}%
+  \ifbeamer@colbox@ignorebg\@tempswafalse\fi%
+  \def\beamer@colbox@color{#2}%
+  \setbox\beamer@tempbox=\hbox\bgroup\color@begingroup
+    \ifbeamer@colbox@ignorebg%
+      \colorlet{beamer@temp@color}{bg}%
+      \usebeamercolor[fg]{#2}%
+      \colorlet{bg}{beamer@temp@color}%
+    \else%
+      \usebeamercolor[fg]{#2}%
+    \fi%
+    \vbox\bgroup%
+    \hsize=\beamer@colbox@wd%
+    \@arrayparboxrestore%
+    \leftskip=\beamer@colbox@ls%
+    \ifdim\beamer@colbox@sep>\z@\advance\leftskip\beamer@colbox@sep\fi%
+    \rightskip=\beamer@colbox@rs%
+    \ifdim\beamer@colbox@sep>\z@\advance\rightskip\beamer@colbox@sep\fi%
+    \if@tempswa\ifdim\beamer@colbox@colsep>\z@%
+      \advance\leftskip by\beamer@colbox@colsep%
+      \advance\rightskip by\beamer@colbox@colsep%
+      \vskip\beamer@colbox@colsep%
+    \fi%
+      \ifdim\beamer@colbox@colseps>\z@\vskip\beamer@colbox@colseps\fi%
+    \fi%
+    \ifdim\beamer@colbox@sep>\z@\vskip\beamer@colbox@sep\fi%
+    \beamer@vmode\ignorespaces}{%
+    \ifdim\beamer@colbox@sep>\z@\vskip\beamer@colbox@sep\fi%
+    \if@tempswa
+      \ifdim\beamer@colbox@colsep>\z@\vskip\beamer@colbox@colsep\fi%
+      \ifdim\beamer@colbox@colseps>\z@\vskip\beamer@colbox@colseps\fi%
+    \fi%
+  \egroup\color@endgroup\egroup%
+  \wd\beamer@tempbox=\beamer@colbox@wd%
+  \ifx\beamer@colbox@ht\@empty\else\ht\beamer@tempbox=\beamer@colbox@ht\fi%
+  \ifx\beamer@colbox@dp\@empty\else\dp\beamer@tempbox=\beamer@colbox@dp\fi%
+  \ifbeamer@colbox@rounded%
+    \if@tempswa%
+      \begin{beamerboxesrounded}[%
+        shadow=\beamer@colbox@shadow,%
+        lower=\beamer@colbox@color,%
+        upper=normal text,%
+        width=\beamer@colbox@wd]{}%
+        \box\beamer@tempbox%
+      \end{beamerboxesrounded}%
+    \else%
+      \ifdim\wd\beamer@tempbox>\textwidth%
+        \setbox\beamer@tempbox=\hbox to\textwidth{\hss\box\beamer@tempbox\hss}%
+      \fi%
+      \box\beamer@tempbox%
+    \fi%
+  \else%
+    \if@tempswa\setbox\beamer@tempbox=\hbox{%
+      \usebeamercolor{\beamer@colbox@color}%
+      \hskip-\beamer@colbox@colseps%
+      \fboxsep=\z@\colorbox{bg}{%
+        \hskip\beamer@colbox@colseps%
+        \box\beamer@tempbox%
+        \hskip\beamer@colbox@colseps%
+      }%
+      \hskip-\beamer@colbox@colseps%
+      }\fi%
+    \ifdim\wd\beamer@tempbox>\textwidth%
+      \setbox\beamer@tempbox=\hbox to\textwidth{\hskip0pt minus\beamer@leftmargin\relax\box\beamer@tempbox\hskip0pt minus\beamer@rightmargin\relax}%
+    \fi%
+    \box\beamer@tempbox%
+  \fi%
+}
+\fi
+
+
+\mode<all>
+
+% On finit par traiter les options du package maintenant que tout est défini.
+\tptthemekeys{official}       % Options par défaut.
+\ProcessPgfOptions{/tpt theme}% Options du package.
+
+\endinput
