@@ -1,0 +1,49 @@
+=== Tableau détaillé des tâches
+
+Quelques points supplémentaires pour accompagner le tableau :
+
+*La colonne dédiée au PAN3 est sujette aux modifications* : Nous n'avons eu que très peu de discussion avec les experts. Nous réaliserons dans le futur un entretien avec chacun d'entre eux pour précisément évaluer ce qui est réalisable ou non.
+
+*La liste des modules concernés est simplement indicative* : Cette colonne peut également être sujette au changement, mais elle n'est surtout pas représentative de la répartition des tâches puisque des personnes d'un autre module peuvent très bien apporter leur aide. De plus, les tâches ont des charges de travail très variables.
+
+[cols=",^,^,^",options="header",]
+|====
+| Tâche | Description                                                | Intégré au PAN3 | Modules concernés 
+| T1    | Composition et design de l'application                     |                 | Appli
+| T1.1  | Lister et détailler les fonctionnalités                    | X               | Appli
+| T1.2  | Structurer l'application (menu, input etc...)              | X               | Appli
+| T1.3  | Etablir une charte graphique et un logo                    | X               | Appli
+| T1.4  | Programmer l'application                                   | X               | Appli
+|       |                                                            |                 | 
+| T2    | Les bracelets                                              |                 | 
+| T2.1  | Lister et détailler les fonctionnalités                    | X               | Réal Bracelets
+| T2.2  | Choix des composants nécessaires                           | X               | Réal Bracelets
+| T2.3  | Test fonctionnel (communication BT, actionneur, LED)       | X               | Réal Bracelets
+| T2.4  | Design (après le choix définitif des composants)           | X               | Réal Bracelets + Ergonomie
+|       |                                                            |                 | 
+| T3    | Instruction de navigation                                  |                 | 
+| T3.1  | Etablir une correspondance instructions GPS/vibrations     | X               | Ergonomie
+| T3.2  | Coder le passage des instructions API aux vibrations       | X               | Navigation ou Real Bracelet (à déterminer)
+| T3.3  | Test et retour sur la perception des vibrations            | X               | Ergonomie + Tests et Intégrations
+|       |                                                            |                 | 
+| T4    | Partie Back-End du système                                 |                 | 
+| T4.1  | Implémentation et récupération des requêtes d'itinéraires avec l'API | X     | Codage API
+| T4.2  | Implémenter le paramétrage des itinéraires selon ceux indiqués par l'utilisateur   | X          | Codage API
+| T4.3  | Gestion des points d'intérêts                              | X               | Codage API + navigation + POI (à déterminer)
+| T4.4  | Signalement des points d'intérêts en temps réel            | X               | Navigation
+| T4.5  | Vérification du suivi de l'itinéraire                      | X               | Navigation
+|       |                                                            |                 | 
+| T5    | Paramétrages                                               |                 | 
+| T5.1  | Etablir les critères et paramètres d'itinéraires           | X               | Codage API
+| T5.2  | Etablir les paramètres des bracelets                       | X               | Real Bracelets + Ergonomie
+| T5.3  | Etablir la liste des potentiels points d'intérêts et les catégoriser      | X | POI
+|       |                                                            |                 |  
+| T6    | Assemblage du projet                                       |                 | 
+| T6.1  | Constitution d'un prototype du bracelet                    | X               | Réal Bracelets
+| T6.2  | Création du support physique du bracelet                   | X               | Bracelets + Ergonomie
+| T6.3  | Finalisation du bracelet                                   | X               | Groupe entier
+| T6.4  | T5.1 à T5.3 une deuxième fois pour un autre bracelet       |                 | cf tâches précédentes
+
+
+
+|====

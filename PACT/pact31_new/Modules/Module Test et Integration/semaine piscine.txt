@@ -1,0 +1,40 @@
+Merge Sequence
+
+Interface BDD
+	done:	Client et Server
+	done:	Connexion base de données
+	done:	Demande spécifique du client
+	done:	Clients Java (module UI)
+
+Interface, Interface Admin
+	done:	Connexion au sever MySQL
+
+Interface Peuplage BDD
+	done:	Données envoyés à la BDD
+
+
+
+Interface  Bracelet - Codage
+	done:	Read battery level
+	done:	Vibrer à partir de l'appli
+
+
+
+Merge Sequence
+	Bloc 1:
+		(Peuplage BDD - BDD)
+			|	|	|	|
+		(Interface Admin)
+
+	Bloc 2:
+		(Bracelet - Codage)
+			|	|	|
+		(UI)
+
+	Indépendants:
+		Ergonomie
+		Test & Intégration
+
+
+
+

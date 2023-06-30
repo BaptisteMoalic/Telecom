@@ -1,0 +1,30 @@
+////
+ Description des interfaces (PAN1 / PAN2)
+
+Pour le PAN1, il faut identifier et décrire sommairement toutes les
+interfaces entre modules.
+
+Pour le PAN2, il faut une description complête des interfaces.
+
+Il faut ici une description textuelle de chaque interface, c’est à
+dire +
+chaque échange entre deux blocs. Si c’est une interface entre deux
+blocs +
+informatiques, c’est une interface Java. S’il y a des échanges de +
+données complexes, il faut en décrire le format avec grande précision.
+Si c’est une interface +
+entre deux blocs électroniques, c’est une description des signaux +
+électroniques. Etc.
+////
+
+=== Interface Téléphone-Bracelets
+
+Echanges via Bluetooth entre le téléphone et les bracelets. Transmet le changement du motif vibratoire et autres personnalisations paramétrées par l'utilisateur, ainsi que l'instruction de vibration pour le guidage, et le mode de recherche actuel (restaurant, itinéraire, parking).
+
+'''''
+
+=== Interface GPS/API-Application
+
+Interface dont la gestion est comprise dans le codage de l'application Android, qui envoie la requête de trajet à Google Maps et traite/trie les réponses envoyées par Google Maps en s'assurant qu'elles conviennent aux exigences de l'utilisateur/trice.
+
+'''''

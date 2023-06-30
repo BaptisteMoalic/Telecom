@@ -1,0 +1,26 @@
+=== Module Tests et Intégration
+
+==== Description
+
+C'est ce module qui se chargera de tester les fonctionnalités, et d'intégrer le travail des autres modules ensemble.
+
+Parmi les tâches à effectuer, il y a notamment :
+
+* Debug de code Java, et autres languages utilisés dans les autres modules
+* Création de fichiers tests génériques pour les itinéraires, afin de ne pas avoir à sortir dehors à chaque test, et systématiser ces tests
+* Tests en conditions réelles
+
+
+==== Avancement
+
+
+* 27/01 Mise en place des branches pour tous les groupes
+
+* 14/02 Regroupement de tous les tests / interfaces
+* 14/02 Mise en place des dossiers 
+
+
+
+
+
+==== Bibliographie spécifique

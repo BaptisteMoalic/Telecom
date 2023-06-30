@@ -1,0 +1,14 @@
+Christophe PRIEUR:
+- quoi pour PAN2 --> binôme / module, fixé par experts, réalisation
+- matériel achat ? --> demander Marco , prend du temps pour commandes --> SE simulateur
+- trouver experts: sur le site de l'école dans les labos de recherche, synapses (catalogue de formation)
+expliquer PACT + mettre en copie christophe
+
+MODULES:
+appli: UI + adaptation réponse codage api pour affichage chemins et affichage du chemin choisi armi les différents itinéraires
+navigation: recoit requete utilisateur + demande codage api + recoit chemin de codage API + choix utilisateur + com msgs vers bracelets
+codage API : ajout points d'intérêts, signalement points d'intérêts (critères: proximité, notations)
+Réalisation bracelets: réalistion tech, com avec tél, prog instructions vibrations
+amélio participative: gestion BD des ajouts utilisateur, client-serveur
+ses ergonomie: déf instructions (et modes de transports), taille, poids..., instructions fonctionnelles ?
+tests intégration:

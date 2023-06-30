@@ -1,0 +1,31 @@
+{
+    "env": {
+        "myDefaultIncludePath": [
+            "${workspaceFolder}/**"
+        ],
+        "myCompilerPath": "D:\\Programmes\\gcc\\bin\\gcc.exe"
+    },
+    "configurations": [
+        {
+            "name": "Win32",
+            "intelliSenseMode": "clang-x64",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/Users/Julien/Documents/ArduinoData/packages/esp32/hardware/esp32/1.0.4/**"
+            ],
+            "macFrameworkPath": [],
+            "defines": [],
+            "forcedInclude": [],
+            "compilerPath": "D:/Programmes/gcc/bin/gcc.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "compileCommands": "${workspaceFolder}/.vscode/launch.json",
+            "browse": {
+                "path": [
+                    "C:/Users/Julien/Documents/ArduinoData/packages/esp32/hardware/esp32/1.0.4"
+                ]
+            }
+        }
+    ],
+    "version": 4
+}

@@ -1,0 +1,123 @@
+T&I
+
+Tests:
+	Ergonomie
+		* vérifier que les motifs sont distinguables les uns des autres (utilisation d'un vibreur et d'un générateur de tension)
+		* Tester la pertinence drs signaux, en essayant de reconnaitre les signaux envoyés
+
+	Bracelets
+		* test_bluetooth_V[X] : code pour faire communiquer en BLE l'ESP avec un appareil Android. Une feature est ajoutée pour chaque version (permet de traquer l'origine du reboot en boucle de l'ESP)
+		* test_bluetooth_V0 : Transmet le niveau de batterie à l'appareil Android. Niveau de référence de la batterie à ajuster.
+		* test_bluetooth_V1 : Contient un deuxième service, avec une caractéristique vide pour le moment.
+		* test_bluetooth_V2 : Le service "custom" appelle une fonction de Callback qui signale l'écriture/la lecture
+		* test_bluetooth_V3 : le service "custom" enregistre maintenant le motif sous forme d'une chaine de caractère. On peut écrire et lire le motif moteur.
+		* test_bluetooth_V4 : le service "custom" contient 2 caractéristiques: la première qui est le motif choisi pour modifier, et le deuxième la modification que l'on souhaite apporter (écriture seule)
+		* test_bluetooth_V5 : les motifs sont maintenant sotckés sur la mémoire Flash.
+		* test_led_embarquee: fait clignoter la led embarquée (rouge, à coté du port USB), allumée 0.5sec puis éteinte 0.5sec, en boucle
+		* test_motif_moteur : joue un motif moteur de 5 secondes toutes les 3 secondes. Pin moteur à ajuster.
+		* test_print : simple test où la carte envoie par la liaison usb/série le message "Print chaque demi-seconde" en boucle
+		* test_RGBWstrandtest_exemple_dInternet :  Fait clignoter toutes les LEDs du bandeau en RGB, alternance des trois couleurs et défilement sur les LEDs
+		* test_stockage : enregistre un motif moteur sur la mémoire flash de l'ESP, pour pouvoir y accéder même après rallumage.
+		* test_stockage_multiple : enregistre deux motifs moteur sur la mémoire flash de l'ESP (test du fonctionnement de l'espace de nom)
+		* test_stockage_clear : efface tout ce qui a été stocké dans la mémoire Flash par test_stockage ou test_stockage_multiple
+		* WIP/bracelet : module qui contiendrait tout à terme.
+
+		== Tests matériel (pour le module test et intégration)
+
+		=== 1 seul bracelet
+
+			- Tester la communication
+			- S'assurer qu'un message inattendu ne fait pas planter le bracelet (erreur ignorée côté bracelet, application informée?)
+			- Une erreur doit être levée si le bracelet se retrouve déconnecté inopinément de l'application pendant un guidage (affichage rouge sur le bracelet, vibration particulière? et notification sur le téléphone)  -> critère pour définir la 					déconnexion?
+			- Vérifier que les motifs vibratoires sont bien reproduits
+			- Vérifier que les DEL sur le bracelet indiquent ce qu'il faut
+
+		=== 2 bracelets
+
+			- vérifier que l'attribution gauche/droite est bien faite
+
+
+		== Tests d'informations en provenance de codage navigation
+
+			- vérifier que les motifs de vibration sont bien transmis/mémorisés
+			- vérifier que les instructions de déplacement sont converties dans les bons ordres et motifs de vibration
+	
+	UI Android
+		Test des liens entre menus (chaque sous-menu co-accessible aka accès et retour).
+		Test des messages envoyés par les boutons de décision (chaque option de trajet récupérable).
+		Test de l’affichage des cartes (pas encore codé puisque pas le lien fait avec l’API).
+		Test du fonctionnement des seekbar (paramétrage des bracelets) et du stockage des données.
+	BDD
+		Mettre des infos dans la base de données
+		Lire des infos dans la base de données
+		Mettre des infos dans la base de données à partir d'un server
+		Lire des infos dans la base de données à partir d'un server
+		Etablir une connexion client-serveur
+		Mettre des infos dans la base de données à partir d'un client
+		Lire des infos dans la base de données à partir d'un client
+	Peuplage BDD
+		Vérification que le crawling marche bien
+		Conversion format de données (Crawling -> BDD)
+	Interface Administrative
+		Tests des liens entre pages (chaque page co-accessible aka accès et retour au menu principal)
+		Test de l'ajout d'un point d'intérêt ou d'un trajet.
+		Test de la validation d'un POI ou trajet ajouté par un utilisateur.
+		Test du rejetd'un POI ou trajet ajouté par un utilisateur.
+		Test de la connexion (login)
+	Codage prise de décisions
+		requête simple à l’API tomtom, récupérer la réponse, la stocker quelque part, la visualiser simplement
+		traitement de la réponse
+		stockage et utilisation des patterns de vibrations (envoit d’ID aux bracelets)
+		recalcul d’itinéraire (vers un point C intermédiaire au trajet de A à B)
+
+
+
+
+
+
+Interfaces:
+	BDD 					<--> Codage prise de décisions
+	BDD 					<--> Peuplage BDD
+	BDD 					<--> Interface Administrative
+
+		
+		Requête HTTP
+		1. Demande utilisateur et mot de passe (hashé) (Client->Serveur)
+		2. Renvoyer Tokens (Serveur->Client)
+		3 .Requête (Client->Serveur)
+		4. Action (Serveur->Client)
+
+		Actions
+			- Ajouter PI dans BDD (nom, coordonnées Long/Lat, type,  [commentaire])
+			- Ajouter Trajet dans BDD (nom, trajet(JSON), type,  [véhicule, temps, commentaire])
+			- Lire Element dans BDD (PI/Trajet, nom)
+			- Lire Element dans BDD (PI/Trajet, coord Long/Lat)
+			- Lire Element dans BDD (PI/Trajet, trajet)
+			- Lire Elements dans BDD (PI/Trajet, type)
+			- Lire Elements dans BDD (Trajet, véhicule)
+			- Lire Elements dans BDD (Trajet, temps) (moins de ... minutes)
+			- Lire Elements dans BDD (Trajet, temps, temps) (entre ... minutes et ... minutes)
+			- Lire Elements dans BDD (PI/Trajet, utilisateurs)
+			- Lire Elements dans BDD (PI/Trajet, date)
+
+	Codage Prise de décisions	<--> UI Android
+	Codage Prise de décisions	<--> Bracelets :
+			- envoie depuis l'application des ordres de vibrations par bluetooth : le prototype d'un ordre sera 
+			   bluetooth_[motif 4]
+
+
+
+
+Restructure le git
+	Forme ???
+
+
+
+
+
+
+
+
+
+
+	

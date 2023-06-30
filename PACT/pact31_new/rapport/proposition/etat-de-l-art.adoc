@@ -1,0 +1,46 @@
+=== Description de l’état de l’art
+ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
+
+// *_Note : 1 page max._*
+
+// Décrivez, en les citant via la bibliographie, les approches/produits
+// ressemblant à votre projet et les différences éventuelles. Illustrez
+// avec des images si besoin. Utilisez des renvois vers votre
+// bibliographie : « comme démontré dans [2], … » 
+
+==== Montres connectées 
+
+Les montres connectées sont en plein essor, en partie à cause du nombre de fonctionnalités grandissant de façon exponentielle. Qu'en est-il de la navigation GPS? Tout d'abord, toutes les montres ne sont pas équipées de technologies de localisation. En effet, les montres bas de gamme, et même parfois de gamme moyenne, ne sont pas nécessairement dotées de tels modules. Parmis les montres équipées, toutes ne se servent pas de cette fonctionnalité à des fins de guidage, mais plutôt à l'enregistrements des trajets (montre de coureur), sécurité (Apple Watch), etc... 
+
+Dans le meilleur des cas, des instructions GPS sont retransmises sur l'écran de la montre. Bien qu'il n'y ait pas besoin de saisir son téléphone pour regarder le trajet, il faut toujours regarder autre part que sa route! Notre objectif étant d'éviter toutes perturbations lors de la conduite (en voiture) ou du pilotage (vélo, trottinette), il reste plus intéressant de ce point de vue.
+
+==== Le Chal
+
+"Le Chal" est un projet venant du chercheur hindou A. Sharma. Nommé "Amène-moi là-bas" en français, ce projet suit un principe très simple : il vise à développer une paire de chaussures guidant les aveugles. Il est similaire au nôtre dans sa manière de transmettre les informations de navigation. En effet, des vibrations, d'abord légères, guident l'utilisateur dans la bonne direction. Les vibrations sont tridimensionnelles : les chaussures disposent de modules vibrants aux quatres points cardinaux et vibrent selon un motif indiquant la direction à suivre.
+On peut noter deux différences intéressantes entre notre projet et Le Chal :
+
+* Le public ciblé n'est pas le même. En effet, là où le projet de A.Sharma vise à assister les personnes aveugles, le nôtre vise un public plus large, bien qu'il soit utilisable par des personnes malvoyantes ou malentendantes. En particulier, le système OnionWizz est utilisable par les utilisateurs d'automobiles, de vélos ou de trottinettes, aini que par les piétons. Il a principalement pour but d'éviter les dangers liés à un regard appuyé sur son écran de navigation, que ce soit le GPS en voiture ou le téléphone à une main sur un vélo.
+
+* Les vibrations sont un point commun, mais leur implémentation n'a rien à voir. Là où le projet Le Chal propose un guidage en permanence à l'aide d'un gradient de vibrations à trois dimensions, notre projet se concentre sur des signaux restranscrivant des instructions, à la manière d'instructions vocales données par un GPS. Nous avons donc une correspondance entre des motifs de vibration et des instructions de navigation qui sont données à des moments précis dans le temps. 
+
+https://www.nouvellestechnologies.net/chaussure-gps-pour-aveugle.php#1123
+
+==== onTracks
+
+onTracks est une marque de montres/bracelets qui permettent de guider l'utilisateur vers une destination qu'il a définie au préalable. Son fonctionnement est identique à celui de l'application de notre projet, mais le design du bracelet de onTracks montre qu'il est destiné à des sportifs (bracelets qui entoure également le pouce, montres). Ce dispositif ne prend pas en compte la présence de parkings aux alentours, et n'est pas nécessairement adapté à l'utilisateur lambda.
+
+https://www.ontracks.co/pages/pack-active-ontracks-outdoor/
+
+////
+==== Exemples de citations
+
+Les références bibliographiques sont regroupées dans le fichier `References.adoc`
+à la racine du répertoire `rapport`.
+On peut y faire référence dans toutes les sous parties du document.
+
+On peut citer comme exemple l'article de Claude E. Shannon sur la
+théorie de la communication <<RefShannon>>
+ou, bien évidement, la vitrine des projets PACT <<VitrinePACT>>.
+
+Voir <<TOTO,la référence>> très intéressante elle aussi.
+////

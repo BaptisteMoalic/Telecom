@@ -1,0 +1,14 @@
+
+*_Note : Liste des références exploitées. Une référence complète
+donne titre, auteur(s), date, journal, revue, source de publication,
+titre de conférence, numéro, pages. Une webographie est aussi
+envisageable : titre, auteur, date, page web_*
+
+* [[RefShannon]]RefShannon : *C. E. SHANNON*, _A Mathematical Theory
+of Communication_, Reprinted with corrections from The Bell System
+Technical Journal, pages 379–423, 623–656, Vol. 27, 1948,
+http://sites.google.com/site/parthochoudhury/aMToC_CShannon.pdf
+* [[VitrinePACT]]VitrinePACT : _Vitrine des projets PACT_,
+https://pact.wp.mines-telecom.fr/vitrine/
+* [[TOTO]]XXX : *M. S. Otor*, _Best paper ever_, Livre de la jungle,
+Volume 2, pages 33-34, 1777

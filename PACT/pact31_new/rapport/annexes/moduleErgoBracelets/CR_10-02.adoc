@@ -1,0 +1,22 @@
+== Compte-rendu de la visite du FabLab avec Mickaël Bouhier le 10/02 à 13h00
+
+• Machines : imprimantes 3D, CAO, découpe laser
+
+• Méthodes : à partir de plastique (différentes strates), faire un moule et couler du silicone ou quoi, autre machine bien plus précise, où il faut retirer de la résine après
+
+• Matériaux : boîtes en plastique, silicone pour le bracelet, couler dans la colle, fils conducteurs flexibles, scratch
+
+• Démarches :
+1. Faire des boîtes pour bloquer les cartes
+Rattacher le bracelet en silicone --> système où l'encoche est va dans le truc direct et on referme le cadran avec vis etc, ou bien méthode de la tige qui passe dans quelque chose de fixe
+Couler les vibreurs dans des petits modules, et les couler dans le bracelet
+Faire passer les fils dans des trucs flexibles ou dans le silicone (c'est juste le fil qui bougera, pas la jonction !!)
+
+2. Trouver un truc déjà fait?
+
+3. Faire un grand bracelet en silicone, et coller un gros cadran par-dessus
+
+4. Nouvelles idées et possibilités pour la v0:
+..Trouver un bracelet déjà existant et l’adapter à nos besoins
+..Utiliser un scratch pour l’attache, que l’on ferait passer par un cadre faisant parti du caisson des composants
+..cable management inexistant pour la v0

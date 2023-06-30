@@ -1,0 +1,36 @@
+=== Répartition des élèves par module
+
+Nos huit modules sont les suivants :
+
+* UI Application Android
+* Codage prise de décisions
+* Interface Administration
+* Amélioration participative des PI (BDD)
+* Réalisation des bracelets
+* Ergonomie (SES)
+* Peuplage BDD
+* Test & Intégration
+
+Des additions additionnelles sur chaque module sont disponibles dans la section "annexe" ainsi que leur avancement respectif, dont le travail déjà effectué.
+
+[cols=",^,^,^,^,^,^,^,^",options="header",]
+|====
+| Nom Module | UI Application Android | Codage prise de décisions | Interface Administration | Amélioration participative des PI (BDD)| Réalisation des bracelets  | Ergonomie (SES)     | Peuplement BDD |Test & Intégration
+| Nom Expert | Jean-Claude Dufourd | Jean-Claude Moissinac | Jean-Claude Dufourd              | Antoine Amarilli             | Tarik Graba                         | Stéphane Safin                    | Tiphaine Viard | Jean-Claude Moissinac
+
+| Alexandre Riabtsev  |                         |                               | X                   |                                            |                                     |                                   | X                                |
+
+| Baptiste Moalic     |                         |                               |                     | X                                          |                                     | X                                 |                                  |
+
+| Clara Delabrouille  | X                       |                               | X                   |                                            |                                     |                                   |                                  |
+
+| Isaïe Muron         |                         | X                             |                     |                                            |                                     | X                                 |                                  |
+
+| Julien Marzal       |                         |                               |                     |                                            | X                                   |                                   | X                                |
+
+| Lucie Molinié       |                         | X                             |                     |                                            | X                                   |                                   |                                  |
+
+| Quentin Patinier    |                         |                               |                     | X                                          |                                     |                                   |                                  | X
+
+| Simon Pellicer      | X                       |                               |                     |                                            |                                     |                                   |                                  | X
+|====

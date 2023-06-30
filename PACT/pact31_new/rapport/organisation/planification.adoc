@@ -1,0 +1,258 @@
+=== Planning temporel PACT
+
+==== Taches / PAN1 13/11/19
+
+===== Générales
+
+* rapport: Les lignes marquées d'une * possèdent des dates peu représentatives. Ces documents étaient rédigés à l'avance, mais retrouver une date exacte est impossible. J'ai donc (Isaïe) indiqué la date à partir de laquelle seule des corrections mineures ont été réalisées. En ce qui concerne les sujets et le scénario, Alexandre, Julien et Simon ont été les principaux relecteurs et se sont occupés des corrections et changements de phrases. Il est important de noter que les phases de recherche d'idées, fonctionnalités, etc... étaient toujours réalisées entièrement en groupe (lors des séances en présentiel) avec une participation de tous les membres du groupe.
+
+[cols=",^,^,,",options="header",]
+|====
+|Tâche                                         |Qui                        |Quand |Fait |Remarques
+|sujet (français et anglais)                   | Clara                     | 2/11 | oui | finalisé le 2/11 *
+|scenario                                      | Baptiste, Clara et Julien | 2/11 | oui | finalisé le 2/11 *
+|architecture (schéma et documentation)        | Groupe entier             | 7/10 | oui | date de réalisation != date de mise en ligne/commit
+|story-board IHM                               | Clara                     | 3/11 | oui | finalisé le 4/11 *
+|découpage en modules et tâches                | Isaïe                     | Semaine du 26/10     | oui | finalisé et écrit en ascii la semaine du 2/11
+|planning temporel (ce document, personnalisé) | Isaïe                     | 4/11 | oui | finalisé le 4/11
+| description                                  | Lucie                     | 4/11 | oui | finalisée le 4/11
+| états des arts                               | Quentin et Isaïe          | 4/11 | oui | dernières grosses modifications le 4/11
+| Logo                                         | Baptiste (et Lucie)       | 4/11 | oui | ébauches rendues le 4/11
+|====
+
+* présentation 15mn
+
+[cols=",^,^,,",options="header",]
+|====
+|Tâche |Qui |Quand |Fait |Remarques
+|préparation du document |Groupe entier |7/11 |oui |
+|répartition de la parole |Groupe entier |8/11 |oui |
+|répétition |Groupe entier |8/11 |oui |
+|====
+
+==== Taches / PAN2 20/01/20
+
+===== Générales
+
+* rapport
+
+[cols=",^,^,,",options="header",]
+|====
+|Tâche |Qui |Quand |Fait |Remarques
+|mise à jour de l'état de l'art selon retour jury PAN1 | | | |
+|mise à jour du découpage et des modules | | | |
+|mise à jour du scénario et des fonctionnalités de points d'intérêts | | | |
+|interfaces | | | |
+|plan de test par module et global | | | |
+|avancement | | | |
+|====
+
+* Rdv avec les experts pour une meilleure répartition et définition des modules
+
+[cols=",^,^,,",options="header",]
+|====
+|Tâche |Qui |Quand |Fait |Remarques
+|module Ergonomie |Isaïe et Baptiste |17/11 |oui |avec Stephane Saffin. cf link:rapport/annexes/moduleErgoBracelets/CR_Safin_17-11_B.adoc[compte-rendu^]
+|module Réalisation bracelets |Julien, Lucie, Isaïe, Baptiste, Alexandre, Quentin |19/11 |oui |avec Tarik Graba. cf compte-rendu def_modules/point_real_bracelets.txt
+|module BDD |Baptiste et Quentin |11/01 |Oui |avec Antoine Amarilli. link:rapport/annexes/moduleAmelioParticipative/CR_11-01.adoc[Compte-rendu disponible ici^]
+|définition modules "infos" | | | |avec JC Dufourd.
+|définition modules "infos" | | | |avec JC Moissinac.
+|====
+
+* Prendre rdv avec vos experts pour le PAN2
+
+[cols=",^,^,,",options="header",]
+|====
+|Tâche |Qui |Quand |Fait |Remarques
+|module Ergonomie |Isaïe et Baptiste |11/02 à 12h |Oui |avec Stéphane Safin, cf link:rapport/annexes/moduleErgoBracelets/moduleErgoBracelets.adoc[compte-rendu^]
+|module BDD |Quentin et Baptiste |28/01 à 16h15 |Oui |avec Antoine Amarilli, cf link:rapport/annexes/moduleAmelioParticipative/moduleAmelioParticipative.adoc[compte-rendu^]
+|====
+
+===== Modules
+
+* Réalisation bracelets
+
+[cols=",^,^,",options="header",]
+|====
+|Tâche |Quand |Fait |Remarques
+|Prendre connaissance de l'ESP32 et du github arduino dédié | | |
+|====
+
+* Autres modules - Exemple Android
+
+[cols=",^,^,",options="header",]
+|====
+|Tâche |Quand |Fait |Remarques
+|Installation de l’outil Android Studio | | |
+|TP Android | | |
+|Squelette d’application | | |
+|GUI | | |
+|Plan de test | | |
+|====
+
+==== Tâches / PAN3 18/03/20
+
+===== Générales
+
+* Préparer un déroulé de la démo et du ``matériel'' de démo
+
+===== Modules
+
+* Android
+
+[cols=",^,^,",options="header",]
+|====
+|Tâche |Quand |Fait |Remarques
+|Codage navigation entre menus |semaine piscine |oui |
+|Ajout POI dans la base de données |semaine piscine|oui|
+|Choix d'itinéraires |semaine piscine |oui |
+|Observation d'itinéraire |semaine piscine |oui |
+|====
+
+
+* API Navigation
+
+[cols=",^,^,",options="header",]
+|====
+|Tâche |Quand |Fait |Remarques
+|Récupération synchrone/asynchrone des instructions |semaine piscine |oui |
+|programmation du gps |semaine piscine |oui |
+|connexion bluetooth avec le bracelet |semaine piscine |oui |
+|====
+
+
+* Interface Administrateur
+
+[cols=",^,^,",options="header",]
+|====
+|Tâche |Quand |Fait |Remarques
+|Création d'une interface d'administration avec Bootstrap |semaine piscine |oui |
+|Interfaçage avec la base de données existante en PHP |semaine piscine |oui |
+|====
+
+
+* BDD / Client-Serveur
+
+[cols=",^,^,",options="header",]
+|====
+|Tâche |Quand |Fait |Remarques
+|Création d'un serveur et un client test |semaine piscine |oui |
+|Connexion à la BDD par le serveur |semaine piscine |oui |
+|Requêtes prédéfinis |semaine piscine |oui |
+|Connexion à partir d'un client sur une autre machine |semaine piscine |oui |
+|Connexion à partir d'un client Java |semaine piscine |oui |
+|====
+
+
+* Ergonomie
+
+[cols=",^,^,",options="header",]
+|====
+|Tâche |Quand |Fait |Remarques
+|Tests du tableau de variation |semaine piscine |oui |
+|Réalisation du bracelet |semaine piscine |oui |
+|====
+
+
+* SE Bracelet
+
+[cols=",^,^,",options="header",]
+|====
+|Tâche |Quand |Fait |Remarques
+|correction de la détection de changement de mode via bouton |semaine piscine |oui |
+|scan d'un onion wizz alentours |semaine piscine |oui |
+|connexion au premier bracelet trouvé |semaine piscine |oui |
+|mise en veille prolongée |semaine piscine |oui |
+|création et soudure du PCB |semaine piscine |oui |
+|====
+
+
+* Test & Intégration
+
+[cols=",^,^,",options="header",]
+|====
+|Tâche |Quand |Fait |Remarques
+|Envoi de la base de donnée du module Crawling |semaine piscine |oui |
+|Connexion à la BDD par l'interface admin|semaine piscine |oui |
+|Connexion à la BDD par le client|semaine piscine |oui |
+|Connexion de l'appli au bracelet |semaine piscine |oui |
+|====
+
+
+
+==== Tâches / PAN4 04/05/20
+
+===== Générales
+
+* poster pour le stand
+
+[cols=",^,^,",options="header",]
+|====
+|Tâche |Quand |Fait |Remarques
+| | | |
+|====
+* présentation 4 slides
+
+[cols=",^,^,",options="header",]
+|====
+|Tâche |Quand |Fait |Remarques
+| | | |
+|====
+
+===== Modules
+
+* Android
+
+[cols=",^,^,",options="header",]
+|====
+|Tâche |Quand |Fait |Remarques
+| | | |
+|====
+
+* API Navigation
+
+[cols=",^,^,",options="header",]
+|====
+|Tâche |Quand |Fait |Remarques
+| | | |
+|====
+
+* Interface Administrateur
+
+[cols=",^,^,",options="header",]
+|====
+|Tâche |Quand |Fait |Remarques
+| | | |
+|====
+
+* BDD / Client-Serveur
+
+[cols=",^,^,",options="header",]
+|====
+|Tâche |Quand |Fait |Remarques
+| | | |
+|====
+
+* Ergonomie
+
+[cols=",^,^,",options="header",]
+|====
+|Tâche |Quand |Fait |Remarques
+| | | |
+|====
+
+* SE Bracelet
+
+[cols=",^,^,",options="header",]
+|====
+|Tâche |Quand |Fait |Remarques
+| | | |
+|====
+
+* Test & Intégration
+
+[cols=",^,^,",options="header",]
+|====
+|Tâche |Quand |Fait |Remarques
+| | | |
+|====

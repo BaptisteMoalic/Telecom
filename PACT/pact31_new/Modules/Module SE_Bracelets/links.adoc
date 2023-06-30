@@ -1,0 +1,50 @@
+== Bluetooth
+* Explication BLE: https://learn.adafruit.com/introduction-to-bluetooth-low-energy/gap
+* Exemple de code: https://github.com/espressif/arduino-esp32/blob/master/libraries/BLE/examples/BLE_server/BLE_server.ino
+* Spécifications GATT: https://www.bluetooth.com/specifications/gatt/
+* Identifiants de services préexistants: https://www.bluetooth.com/specifications/assigned-numbers/
+
+== ESP32
+* Documentation de vente: https://www.adafruit.com/product/3405
+* Utilisation avec Arduino: https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/using-with-arduino-ide
+* Documentation technique: https://www.espressif.com/en/support/documents/technical-documents
+* Pinouts & explications: https://randomnerdtutorials.com/esp32-pinout-reference-gpios/
+
+== Bibliothèques utiles
+* BlinkControl
+
+== Projet dont on peut s'inspirer en cas de souci
+* Bracelet vibrant: https://learn.adafruit.com/ble-vibration-bracelet
+
+== Bandeau LEDs
+* Description bandeau: https://store.qkits.com/cjmcu-2812-8-8-ws2812-5050-rgb-led.html
+* L'utiliser avec Arduino: https://randomnerdtutorials.com/guide-for-ws2812b-addressable-rgb-led-strip-with-arduino/
+* Librairie ajoutée pour commander le bandeau: https://github.com/adafruit/Adafruit_NeoPixel
+
+== Stockage mémoire
+* https://www.tutorialspoint.com/esp32_for_iot/esp32_for_iot_preferences.htm
+
+== Interruption bouton
+* https://lastminuteengineers.com/handling-esp32-gpio-interrupts-tutorial/
+
+== Vibration Motor
+* Modèle: https://www.pololu.com/product/1637
+* Exemples de codes et cablage:
+** https://www.instructables.com/ESP32-and-DC-Motors-Tutorial-Part-1/
+** https://pobot.org/Modifier-la-frequence-d-un-PWM.html
+** https://electroniqueamateur.blogspot.com/2019/08/modulation-par-largeur-dimpulsion-pwm.html
+** https://randomnerdtutorials.com/esp32-dc-motor-l298n-motor-driver-control-speed-direction/
+** https://diyi0t.com/arduino-pwm-tutorial/
+** https://randomnerdtutorials.com/esp32-adc-analog-read-arduino-ide/
+** https://www.precisionmicrodrives.com/vibration-motors/
+** https://www.vibrationmotors.com/introduction-dc-vibration-motor/
+** https://www.precisionmicrodrives.com/content/how-to-drive-a-vibration-motor-with-arduino-and-genuino/
+** https://www.precisionmicrodrives.com/content/ab-001-discrete-driver-circuits-for-vibration-motors/
+** https://www.precisionmicrodrives.com/content/ab-011-electrical-techniques-for-using-different-power-sources/
+** https://techzeero.com/arduino-tutorials/vibration-motor-with-arduino/ (le +++++ utile)
+** https://components101.com/transistors/s8050-transistor-pinout-equivalent-datasheet
+** https://components101.com/sites/default/files/component_datasheet/S8050%20Transistor%20Datasheet.pdf
+
+== Schématique PAN2
+* Convertisseur eagle to kicad: https://www.snapeda.com/parts/add/ (pas utilisé finalement)
+* Librairie Adafruit-HUZZAH32-ESP32-Feather-PCB-master (eagle): https://github.com/adafruit/Adafruit-HUZZAH32-ESP32-Feather-PCB (pas utilisé finalement)

@@ -1,0 +1,64 @@
+=== Module Amélioration participative des PI (BDD)
+
+Responsables module : Quentin Patinier et Baptiste Moalic
+
+Expert encadrant : Antoine Amarilli
+
+==== Description
+
+Afin qu'Onion Wizz ne soit pas qu'un simple GPS, nous souhaitons fournir aux utilisateurs la possibilité de partager des points d'intérêts ainsi que des trajets, à but récréatif ou non. Pour cela, ils peuvent chercher un point d'intérêt existant déjà répertorié (dont l'existence et les informations seraient récupérées auprès de Google Maps) ou bien l'ajouter manuellement en précisant sa localisation ainsi que la nature du lieu (avec quelques précisions supplémentaires en fonction de la dite nature). En ce qui concerne les trajets, il est nécessaire de les associer à leurs points d'intérêts pour juger de la pertinence d'une proposition. En effet, si l'utilisateur veut se déplacer en vélo pour voir de belles étendues d'eau, on ne va pas lui proposer un road-trip. Chaque proposition de trajet devra donc s'accompagner d'un référencement pertinent, qui se fait à l'aide de précisions sur le mode de transport, la longueur du trajet, une courte description, les PI géolocalisés le long du trajet...
+
+Pour implémenter ces fonctionnalités, il est préférable d'introduire des comptes utilisateurs. Une interaction supplémentaire devenant possible avec ces comptes est de retrouver un ami à travers l'application qui nous guiderait vers sa localisation, qu'il aura rendue publique au préalable.
+
+Les implications techniques principales pour ce module seraient donc les suivantes :
+
+* Gestion de base de données, pour les trajets, les PI et les comptes utilisateurs (interactions client-serveur)
+
+* Programmation objet possible pour les trajets et PI afin de mieux gérer leur caractéristiques
+
+* Demande de trajet à partir de ceux existant / d'une position d'un autre utilisateur : algorithmes de plus court chemin/optimisation
+
+
+==== Avancement
+
+* 19/11 : Création du module
+
+* 11/01 : Réunion avec Antoine Amarilli. Attendus pour le PAN2 :
+. Compte-rendu plus exhaustif disponible link:CR_11-01.adoc[ici^]
+. L'installation d'une base de données (PostgreSQL, MariaDB, MySQL,
+  etc.) et d'un serveur Web (à voir suivant le langage serveur retenu),
+  idéalement sur une machine virtuelle fournie par l'école, à défaut
+  chez nous.
+. Démo avec Phpmyadmin pour montrer que vous avez créé un schéma de base
+  de données et quelques données d'exemple.
+. Un document texte écrit, après discussion avec les autres modules
+  utilisateurs de la base de données, précisant le schéma : quelles
+  relations, quels attributs, et quelle sémantique, quelles contraintes,
+  sur les données stockées
+. Un document texte du même style précisant si vous utilisez des sockets directement, le protocole
+    client-serveur : qu'est-ce qui peut être envoyé, reçu, etc OU si vous faites une API REST : quelles URL est-ce que le
+    client peut requêter, quelle méthode (GET/POST/autre), quels
+    paramètres GET et POST, quel type de retour du serveur (code
+    numérique de retour, contenu), si le retour est par exemple du JSON
+    alors quels champs, quels sémantiques.
+
+
+* 25/01 : Mise en commun du binôme :
+. Phpmyadmin installé sur chacune de nos machines (WAMP pour Baptiste, Apache/MySQL/PHP pour Quentin)
+. Discussion sur :
+  . le schéma de la base de donnée, on attend la réponse des autres modules, entre-temps,
+    on a fait un schéma avec des informations essentielles; Tables : User/Point d'intérêt/(Trajet)
+  . e-mail pour le serveur de Télécom
+  . Protocole Client/Serveur : on a décidé de faire une API REST avec un retour json
+  . Phpmyadmin : on prépare chacun de notre côté la BDD pour montrer le bon fonctionnement
+
+* 28/01 : PAN2 avec Antoine Amarilli
+. Livrable protocole client-serveur disponible link:rapport/annexes/moduleAmelioParticipative/Livrable_protocole_client-serveur.pdf[ici^], et livrable schéma relationnel pour la BDD disponible link:rapport/annexes/moduleAmelioParticipative/Livrable_schéma_relationnel_BDD.pdf[ici^]
+. S'intéresser à comment on gère les sessions, les cookies. Notamment comment l'utilisateur s'authentifie tout du long
+. Faire une LISTE des méthodes : créer, supprimer etc... en précisant notamment si on utilise POST ou GET ou etc..
+
+
+
+
+
+==== Bibliographie spécifique

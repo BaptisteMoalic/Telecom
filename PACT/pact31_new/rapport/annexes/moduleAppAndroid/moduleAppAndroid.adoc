@@ -1,0 +1,18 @@
+=== Module UI Application Android
+
+==== Description
+
+Il y a deux objectifs principaux dans ce module :
+
+*Structurer et designer l'application :* Il s'agit d'établir, préalablement à la programmation, la structure de l'application c'est à dire les menus,
+les paramètres, la disposition etc... Le but final est d'avoir une idée claire de ce qu'est l'application ainsi que de pouvoir répondre à la question
+"Comment accède-t-on à la fonctionnalité  X ? Comment se présente-t-elle ?"
+
+*Coder l'application :* Une fois l'application structurée et designée, il faut lui donner vie. Le but final est assez évident : avoir un squelette de
+l'application de notre projet, c'est à dire une version où l'on peut faire des requêtes à l'API et transmettre des données aux bracelets en faisant appel aux autres modules (cf. autres modules).
+
+*Concrètement*: L'objectif de ce module est de coder, mettre en forme l'interface utilisateur de l'application Android. C'est l'application qui permettra à l'utilisateur de choisir ses chemins, connecter ses bracelets au smartphone (ce n'est pas ce module qui gère l'aspect informatique du protocole), sélectionner ses options de trajets, ses points d'intérêts et les motifs de vibration.
+
+==== Avancement
+
+==== Bibliographie spécifique

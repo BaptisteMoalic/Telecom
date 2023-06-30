@@ -1,0 +1,63 @@
+== Compte-rendu de la séance du 06/01 à 14h00
+
+• On commence par imaginer seulement 1 source par bras
+Imaginons 3 niveaux d'intensité de vibration (de 1 (plus forte) à 3)
+Source des instructions : https://wiki.openstreetmap.org/wiki/Sample_driving_instructions/fr_CH
+
+
+• Nombre de vibration pour exprimer : sortir à la n-ème sortie (Intensité 1)
+--> sur un rond-point
+--> sur un axe principal
+
+
+• Aller tout droit : vibration des deux bracelets (Intensité à déterminer)
+
+
+• Pb : intensité
+Est-ce qu'il arrivera à discerner les différentes vibrations?
+Est-ce que ça va pas le gêner?
+--> Mais ça n'arrive que sur les gros axes, sur des trucs où tu t'y attends
+--> Solution : peut-être faire une sorte de vibration qui ANNONCE qu'on va donner une instruction pour plus tard (Intensité 3)
+
+
+• Signal pour ralentir JUSTE avant d'arriver à la sortie : vibrations gauche-droite-gauche-droite-gauche-etc... (Intensité 2)
+
+
+• Au lieu de discerner x types de virages, on leur demande juste de ralentir avant
+
+
+• "Suivre une direction/Continuer sur la voie principale" ==> même chose que continuer tout droit
+
+
+• "Repartir de là où l'on vient" ==> on fera un simple recalcul d'itinéraire, et il aura un nouvel itinéraire à suivre
+
+
+• "Arrivée à destination/PI" ==> créer un motif de vibration (donner la possibilité à l'usager de créer ses propres motifs? Propose-t-on un motif unique ou genre des profils de vibrations prédéfinis?)
+
+
+• Problèmes de batterie :
+--> Comment indiquer que la batterie devient faible lors d'un trajet?
+=> LED sur les bracelets?
+=> L'application qui calcule la batterie qu'il lui restera à la fin d'un trajet, lui dire
+=> Si au bout d'un certain temps le mec ne fait RIEN (ou bien suit un mauvais itinéraire pendant trop longtemps) les bracelets se mettent en veille (temps de mise en veille à définir avant? en fonction de la batterie? veille intelligente)
+
+
+• "Serrer à gauche/droite" ==> A ce stade, la personne serait en voiture, ce n'est plus notre public..?
+Sinon "Rester sur la file de gauche/droite" ==> vibration LONGUE (Intensité 2)
+
+
+• Idée : rajouter l'heure sur le bracelet
+Bof, encore une fois se ramener à l'appli, où l'usager peut dire qu'il veut arriver avant xxhxx, et le bracelet s'énerve si on arrive trop en retard
+
+
+• Problème : comment différencier tourner à droite et tourner à la première sortie à droite?
+Durée : durée moyenne pour tourner, durée courte pour première sortie
+
+
+• Vibration PILE à la sortie du rond-point : vraiment compliqué, dans le sens où il faut déterminer une certaine zone où la vibration peut s'effectuer (différente pour chaque rond-point et dépendante de la position de l'usager etc..), pas sûr que notre technologie soit assez réactive
+
+
+• Faire demi-tour à un rond-point : peut-être différent de faire sortir à la n-ème sortie. On pensait à faire comme pour "Aller tout droit" mais en un peu plus long. Il n'y a pas de tout droit sur un rond-point.
+
+
+• Idée technique : au lieu de trouver un vibrateur haute technologie, à gradient d'intensité etc... prendre plusieurs moteurs et en allumer qu'un nombre limité selon l'intensité recherchée

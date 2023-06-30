@@ -1,0 +1,12 @@
+module administration : 
+-édition de la base de donnée 
+-administration sous la forme d'une interface web
+-formulaire / gestion de communication avec les utilisateurs
+-moyen d'accéder à des données / retour utilisateurs ? Les retours sur les trajets
+-
+
+peuplade bdd :
+-google maps
+-data.gouv.fr
+-objectif : aller chercher des trajets / PI déjà existants pour remplir notre BDD
+-

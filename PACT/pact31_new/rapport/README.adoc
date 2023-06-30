@@ -1,0 +1,151 @@
+= Rapport d’avancement du groupe 3.1
+PACT groupe 3.1 (Les plus beaux)
+ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
+:doctype: book
+:stem: latexmath
+:source-highlighter: coderay
+:toc-title: Table des matières
+:toc: macro
+:sectnums:
+:imagesdir: images
+
+
+// Partie non numérotée
+:sectnums!:
+== OnionWizz
+
+=== Membres du groupe
+
+* Alexandre Riabtsev
+* Baptiste Moalic
+* Clara Delabrouille
+* Isaïe Muron
+* Julien Marzal
+* Lucie Molinié
+* Quentin Patinier
+* Simon Pellicer
+
+=== Tuteur
+
+* Christophe Prieur
+
+=== Encadrant génie logiciel
+
+* Jean-Claude Moissinac
+
+== Résumé du sujet choisi en français (PAN1)
+
+*_Note: 15 lignes max_*
+
+Notre projet consiste en deux bracelets connectés à une application. Le but de ce système est de proposer un nouveau mode de guidage sur la route pour conducteurs ou cyclistes, ne s'appuyant ni sur des informations visuelles qui peuvent trop facilement distraire lorsque l'attention doit se porter sur la route, ni sur un guidage sonore pas toujours pratique (estimation des distances, réactivité, voix dérangeantes ou difficiles à entendre en extérieur). Pour cela, nous avons donc choisi de communiquer avec l'utilisateur par le biais de vibrations au niveau des bracelets, et potentiellement de DEL colorées pour indiquer les modes actifs (recherche de parking, de station essence, de supermarché par exemple). Le choix de la destination, des modalités du trajet (court, faible pente, petites routes, etc...), des modalités de communication du bracelet (couleurs et durée de vibration) ainsi que des modes mentionnés précédemment se font par le biais d'une application Android. Celle-ci collecte alors des informations issues de Google Maps que le programme analyse pour les transmettre aux bracelets qui exécutent les instructions de la manière choisie par l'utilisateur. Ainsi, notre projet permet de guider l'utilisateur de manière personnalisée, adaptée à ses besoins ou préférences, et sans lui faire encourir les risques ou désagréments causés par la nécessité de vérifier un écran ou prêter attention à une voix.
+
+== English Summary (PAN1)
+
+*_Note : 15 lignes max, version anglaise du texte précédent_*
+
+Our project is composed of two bracelets, connected to an app. The point of this system is to offer a new means of guidance on the road for drivers and bikers. This system relies neither on visual information, which can easily be a distraction at times when the attention should be focused on the road, nor on sound guidance which is not always convenient (distance appreciation, reactivity, disturbing voices that may be difficult to hear outside). In order to do that, we have therefore chosen to communicate with the user by means of vibrations from the bracelets, and possibly colored LEDs to indicate which modes are active (parking, gas station or supermarket search for instance). An Android app allows to choose the destination, the route parameters (short, no slope, small roads, etc...), the bracelet communication parameters (colors, duration of vibrations) as well as the aforementioned modes. This app then collects information from Google Maps, the program analyzes them and sends them to the bracelets, which execute the instructions in the way chosen by the user. Our project thus allows a personalized guidance of the user in a way adapted to their needs or preferences, without the risks and inconvenience caused by the need to check a screen or pay attention to a voice.
+
+////
+*Notes concenant le rapport*
+
+Les différentes pages du document sont rédigées en utilisant le langage
+AsciiDoc. Le squelette de rapport contient des exemples avec entre autre:
+
+* des images,
+* des liens,
+* des équations.
+
+La structure du rapport (parties, sections et la relation avec les
+differents fichiers) se trouve dans le fichier courant.
+////
+
+// en PDF on ne peut pas controler la position de la toc
+// Macros non supportées
+ifndef::backend-pdf[]
+== Table des matières
+:toc-title:
+toc::[]
+endif::[]
+
+// On numérote le reste des sections
+:sectnums:
+
+== Étude d’antériorité et justification de la proposition (PAN1)
+
+include::proposition/proposition.adoc[Description de la proposition]
+
+include::proposition/etat-de-l-art.adoc[Description de l’état de l’art]
+
+== Scénarios d’usage (PAN1)
+
+include::scenario/scenario.adoc[Scénarios d’usage]
+
+<<<
+
+== Architecture du projet (PAN1)
+
+include::architecture/schema.adoc[Schéma d’architecture]
+
+include::architecture/interfaces.adoc[Description des interfaces]
+
+// include::architecture/sequence.adoc[Diagramme de séquence]
+
+include::architecture/ihm.adoc[Interface utilisateur graphique]
+
+include::architecture/taches.adoc[Tableau détaillé des tâches]
+
+<<<
+
+== Organisation du projet (PAN1)
+
+include::organisation/planification.adoc[Diagramme de planification temporel des tâches]
+
+include::organisation/repartition.adoc[Répartition des élèves par module]
+
+// include::organisation/plan-tests.adoc[Plans de test (PAN2+)]
+
+<<<
+
+[bibliography]
+== Bibliographie (PAN1+)
+
+// include::References.adoc[Bibliographie]
+
+<<<
+
+== Annexes
+
+// (pan2) include::annexes/modifications.adoc[Modifications (PAN2+)]
+
+// (apres pan1) include::annexes/avancement.adoc[Avancement des modules]
+
+
+include::annexes/moduleAppAndroid/moduleAppAndroid.adoc[Avancement module Application Android]
+
+
+include::annexes/moduleCodaNavigation/moduleCodaNavigation.adoc[Avancement module Codage navigation]
+
+
+include::annexes/moduleAmelioParticipative/moduleAmelioParticipative.adoc[Avancement module Amélioration participative]
+
+
+include::annexes/moduleTechBracelets/moduleTechBracelets.adoc[Avancement module Technique et logistique des bracelets]
+
+
+include::annexes/moduleErgoBracelets/moduleErgoBracelets.adoc[Avancement module Ergonomie du bracelet]
+
+
+include::annexes/modulePeuplageBDD/modulePeuplageBDD.adoc[Avancement module Peuplage BDD]
+
+
+include::annexes/moduleInterfaceAdministration/moduleInterfaceAdministration.adoc[Avancement module Interface Administration]
+
+
+include::annexes/moduleTestIntegration/moduleTestIntegration.adoc[Avancement module Tests et Intégration]
+
+
+
+
+
+
+`

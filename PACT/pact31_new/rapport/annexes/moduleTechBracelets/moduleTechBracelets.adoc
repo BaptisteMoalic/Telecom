@@ -1,0 +1,36 @@
+=== Module Réalisation des bracelets
+
+==== Description
+
+Ce module couvre principalement la partie *matérielle* de notre projet. Il
+s'agit principalement de trouver avec quels dispositifs nous pouvons
+construire nos bracelets, comment les commander et éventuellement assembler
+les composants pour les tests. Ce module implémentera la communication entre l'application et les bracelets, ainsi que le comportement adopté par les bracelets en fonction des informations reçues de l'application. Nous nous concentrerons d'abord sur la conception d'un seul bracelet, avant de voir comment le rendre plus compact si besoin, puis le dupliquer pour avoir les deux bracelets comme voulu à terme. Ce module s'occupera aussi de la création du bracelet (en impression 3D par exemple) en plus de la partie électronique.
+
+==== Avancement
+
+===== Point du 22/11
+
+[.underline]#Pendant la réunion du 19/11 avec Tarik Graba:#
+
+Nous avons défini le matériel spécifique nécessaire pour ce module.
+
+- Adafruit HUZZAH32 (type ESP32) programmable avec l'IDE Arduino puis éventuellement en C
+- Batterie LiPo 3.7 V, 500 mAh
+- plusieurs moteurs à poids excentré (vibreurs)
+- des bandeaux LED adressables
+
+Nous avons aussi déterminé les points ci-dessous:
+
+- nous devrons travailler en étroite collaboration avec le module SES "Ergonomie des bracelets"
+- La réalisation physique du bracelet (partie non électronique) se fera probablement en impression 3D
+- nous réaliserons un bracelet en prototype, pour s'assurer que tout fonctionne, avant de faire un deuxième pour avoir le dispositif complet
+- le prototype sera fait avec le HUZZAH32 d'abord (comme preuve de concept), puis nous chercherons à miniaturiser si nécessaire
+- pour la communication, nous commencerons par une connexion Bluetooth classique (pour tests avec un pc) puis BLE --> plus simple pour android
+- il faudra établir un protocole de communication
+- il nous faut définir notre paradigme: la prise de décision se fait-elle sur le téléphone ou la carte?
+- nous considérons pour le moment la possible utilisation de commandes AT (Bluetooth vers port série, pour passer des commandes avec une séquence d'échappement pour passer des commandes spécifiques)
+
+Le 08/01/2021: création d'une nouvelle branche dédier au travail pour ce module (SE bracelet).
+
+==== Bibliographie spécifique

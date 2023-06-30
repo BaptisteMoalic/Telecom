@@ -1,0 +1,56 @@
+=== Module Prise de décision et gestion de la navigation
+
+==== Description
+
+Ce module comprend les fonctionnalités suivantes :
+
+* la demande et la récupération d'itinéraire via l'API de TomTom : cette demande a lieu au début de la navigation, en cas de décision de l'utilisateur d'atteindre un Point d'Intérêt, ou en cas de détection de changement d'itinéraire.
+* le  _geocoding_ (pour récupérer les coordonnées à partir de l'adresse saisie par l'utilisateur dans le champ "destination" par exemple), et le _reverse geocoding_ (pour récupérer l'adresse correspondant à la position actuelle de l'utilisateur, pour l'adresse de départ, et pour vérifier que l'utilisateur est bien sur l'itinéraire)
+* Avertir l'utilisateur de Points d'Intérêts à proximité (récupérés préalablement par l'API) et la recherche de Points d'Intérêts à proximité d'un itinéraire
+* Avertir l'utilisateur des virages/carrefours etc... lorsqu'il s'en rapproche
+* la recherche et la suggestion d'adresses lorsque l'utilisateur commence à la saisir
+
+Ce module permettra donc d’adapter les instructions récupérées via l’API en instructions adaptées aux bracelets vibrants (partie back-end de l'application). Il faut que, via l’application, les instructions récupérées soient transformées en données exploitables par les bracelets, qui exécuteront les instructions directement sans échanger avec l’API.
+
+==== Avancement
+
+Nous avons défini le fonctionnement de l'outil de dialogue avec l'API:
+
+AVANT :
+
+- demande d'itinéraire : départ - arrivée - POI
+	-- géolocalisation
+	-- récupération d'adresse avec l'API de TomTom
+	-- recherche d'adresse avec l'API de TomTom
+- Demande de l'itinéraire à l'API
+- Stockage de la liste des virages retournée par l'API
+- Demande des POI à proximité de l'itinéraire à l'API
+- Demande des POI à proximité de l'itinéraire à la BDD locale
+
+PENDANT :
+
+- vérification de la position
+- récupération de l'adresse avec l'API de TomTom
+- vérification si la position est sur l'itinéraire
+	- si non : recalcul itinéraire
+	- recalcul POI
+- si POI près (soit à vol d'oiseau, dans ce cas pas besoin d'API, soit par temps de transports, dans ce cas re-API), vibration
+	- si utilisateur accepte, recalcul itinéraire
+- si virage proche (à vol d'oiseau cette fois), vibration
+
+HORS ITINERAIRE :
+- utilisation de l'API pour la recherche de POI/d'adresse rajoutées à la main dans la BDD locale
+
+
+
+
+==== Test
+
+* 10/02 : Envoi des premières requêtes
+
+Des premiers tests d'envoi de requêtes ont été effectués à partir d'un bouton "Send Request" (cf. code dans la branche PDD_Navigation). La requête renvoie une erreur 404. Il s'agit donc peut-être d'une erreur sur l'url de requête.
+_placeholder_
+
+
+
+==== Bibliographie spécifique

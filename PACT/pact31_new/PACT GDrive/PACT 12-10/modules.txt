@@ -1,0 +1,8 @@
+- Design appli 
+- Ergonomie bracelet
+- Codage navigation (itinéraire -> instruction au bracelet)
+- Codage objet proche (traitement signal ?)
+- Codage API
+- Communication (entre application et bracelets) 
+- Aspect technique/matériel bracelet
+- Aspect technique/matériel objet proche

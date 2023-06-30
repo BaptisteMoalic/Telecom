@@ -1,0 +1,18 @@
+////
+=== Scénarios d’usage
+Mettre ici le scénario d’usage que vous avez construit lors des séances
+encadrées par les experts SES. Vous pouvez mettre un scénario amélioré
+(et non celui noté) si vous jugez votre scénario insuffisant pour faire
+comprendre au jury PACT les différentes étapes d’utilisation de votre
+produit/service ou si vous avez changé d’idées entre temps.
+////
+
+=== Guidage
+
+A 6h du matin, Philibert Oignon doit se rendre au travail. Il habite en agglomération, et a accès à un parc de vélos en libre service, qu’il utilise pour ses trajets quotidiens. Il doit se rendre chaque jour chez des clients différents dans le cadre de ses fonctions, et doit donc se repérer dans sa ville. Il utilise l’application OnionWizz pour l’aiguiller. L’application vient avec ses deux bracelets connectés, qui permettent notamment une assistance à la conduite par signaux vibratoires. Philibert Oignon adhère à ce mode de guidage puisqu’il est peu intrusif, et permet une conduite plutôt intuitive. Avant de partir, il sélectionne sa destination sur l’application, et peut ainsi ranger son téléphone en sécurité pour le reste de son trajet. Une fois lancé sur son vélo, le bracelet droit vibrera s'il doit tourner à droite, et celui de gauche vibrera s'il doit tourner à gauche. Ses bracelets vibreront de manière progressive et non continue, de façon à ce que l’utilisateur puisse comprendre les instructions, et anticiper ses mouvements, sans que sa vision ou son ouïe ne soient perturbées. Philibert Oignon aura au préalable défini le seuil de vibrations, et le motif de vibration des bracelets. Lorsqu’il arrive à une certaine distance de sa destination, ses bracelets émettront une vibration spécifique qu’il aura également programmée.
+
+'''''
+
+=== Se garer
+
+En arrivant, Philibert Oignon peut choisir de changer de mode par un petit bouton discret situé sur le bracelet. Ces modes sont également personnalisables sur l’application, et permettent de se diriger vers le parking le plus proche, le fast-food le plus proche, etc. à la guise de l’utilisateur. Une petite LED qui ne dérangera pas la vision de l’utilisateur indiquera quel mode est actif. Philibert Oignon peut ainsi aller se garer à la station la plus proche de sa destination sans avoir à s’arrêter et ressortir son téléphone. Ses bracelets peuvent enfin le guider à pied jusqu’au point précis de rendez-vous. De surcroît, l’application enregistre son trajet, afin qu’il puisse identifier quels passages il souhaite reprendre, ou éviter la prochaine fois et même enregistrer un trajet non calculé par Google Maps. Les bracelets se rangent facilement dans n’importe quel sac, et se rechargent par induction.

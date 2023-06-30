@@ -1,0 +1,20 @@
+REU Tarik GRABA:
+ergo + bracelets proches
+imppresion 3d réalisation physique
+1 bracelet, 2 mockup puis ap selon ses
+preuve de concept avec esp externe puis ensuite plus compact
+3.7 V LiPo
+vibreur moteur poid excentré
+bandeaux leds adressables
+BT classique (ex pour test avec  un pc) puis BLE--> plus simple pour android
+inventer protocole
+quel paradigme, état sur téléphone ou sur carte
+
+sem pro L Me Ve prévenir en avance
+
+esp32 --> regarder comment fonctionne (github esp32), arduino, reprog C
+
+AT: BT vers port série, peut passer commandes avec séquence d'échappement pr rentrer dans le mode
+cf rn 41 ou 42 (histoire --> modems)
+
+contacter moissinac (web, demander autres experts) et dufourd

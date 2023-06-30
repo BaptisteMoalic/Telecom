@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name bracelet1_MyLib)(type Legacy)(uri ${KIPRJMOD}/librairie/bracelet1_MyLib.lib)(options "")(descr ""))
+)

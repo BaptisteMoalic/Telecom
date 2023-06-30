@@ -1,0 +1,44 @@
+== Compte-rendu de la réunion avec Stéphane Safin le 17/11 à 17h00
+
+Pourquoi des bracelets?
+--> déjà la vue très utilisée etcc
+
+Mais en fait, pourquoi pas un vêtement?
+
+Enjeu : guider autre que gauche et droite
+Construire un VOCABULAIRE
+Surtout pour les trottinettes et les vélos (pour les voitures c'est déjà assez avancé...)
+Comment envoyer les instructions et comment les calibrer?
+
+Si on a 30 commandes, on peut pas avoir 2 vibrations seulement
+Discriminer.
+
+--> Donnera aussi des idées sur le dispositif du coup!
+
+--> regarder les instructions que donne un GPS moderne là et comparer
+
+Différencier bon et mauvais GPS (instructions précises etc...)
+
+Comment tester vite ça sans avoir à tout développer?
+Ex: on prend un truc qu'on télécommande, et on teste
+
+(Magicien d'Oz : on simule avec un humain pour ne pas avoir à tout développer)
+
+TESTER VITE pour voir ce qu'on discrimine et tout
+Combien de zones tactiles
+
+Mickaël Bouvier (?) : responsable du FabLab, il a des manchons tactiles et peut nous aider pour le prototypage
+
+2 études en labo : 1) qu'est-ce-qui marche bien qu'on peut faire comprendre
+		2) en situation
+
+Démo ultime : donner les bracelets à JC Dufour, et qu'il soit guidé tout seul vers là où il doit aller
+
+Comment on interragit entre les modes? Les modes sont-ils programmés en amont? Ou bien sont-elles au fil de l'eau? --> retour visuel? swiper? etc... parce que du coup ça change de mode un peu
+Peser les pour et les contre de rajouter ce mode supplémentaire? Pour changer de prgrm il faudrait p-e ressortir le téléphone?
+Est-ce vraiment une plus-value?
+P-e juste le bracelet s'allume qui dit quand on arrive dans un rayon de x mètres à proximité d'un bar etc... (à programmer)
+
+Informations de trafic?
+
+GROS travail sur le vibratoire

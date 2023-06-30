@@ -1,0 +1,46 @@
+== Compte-rendu de la réunion du 11/01 à 13h15 avec Antoine Amarilli
+
+* Ce qu'il faut faire concrètement :
+Un serveur = la machine --> Télécom peut nous en fournir un
+Base de données relationnelle avec schéma + serveur Web
+
+
+* Avantage OpenStreetMaps : on peut directement rajouter des PI
+
+
+* Aspect client-serveur : peut se faire direct avec des serveurs TCP ==> inconvénient : se faire bloquer par pare-feu etc..
+Mieux : faire ça au niveau de l'interface Web (API REST), réponse en HTTP (Le serveur prend des requêtes HTTP, fait les requêtes dans la BDD etc...)
+
+
+* Langages pouvant être envisagés : PHP, Python framework Jango (gros) ou Flask, Bottle
+1 framework --> gestion des connexions
++ librairie pour se connecter à la BDD
+MariaDB, NoSQL, MySQL, Postgresql
+PHPmyAdmin (raisonnable)
+
+
+* Firebase --> L'expert ne pourra pas trop nous aider
+Plus formateur d'apprendre autre chose
+
+
+* Firebase rajoute une dépendance à Google ==> ils peuvent à tout moment disparaître selon leurs propres critères
+MySQL, PHP etc... plus safe
+
+
+* Firebase utilise le NoSQL --> contraire au SQL, ne supporte pas tout le SQL, plus restreint
+moins puissant mais très performant pour du très spécialisé
+
+
+* On stocke les PI sous forme de coordonnées --> flottants
+Table utilisateur pas forcément
+Pour le point d'intérêt --> à qui il appartient, une description, quand il a été créé, type de PI
+OpenStreetMaps est une bonne source d'inspiration
+
+
+* Go aller chercher quelle API on prend
+Comment stocker le trajet? Un enregistrement par point de chaque trajet? Un enregistrement brut?
+--> pour savoir si on veut chercher un trajet dans une certaine région etc...
+
+
+* PHP & MySQL sur OpenClassrooms
+Partie SysAdmin pour setup le serveur à Telecom // En attendant setup PHPmyadmin chez nous

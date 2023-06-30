@@ -1,0 +1,18 @@
+Bracelets :
+• 
+•
+•
+
+Android :• Codage d'une application sous AndroidStudio (en Java)• Formulaire et connexion base de donnée
+• Paramétrage itinéraire, API et programmation d'un GPS
+
+BDD :
+• Création d'une base de donnée aux attributs personnalisées pour notre utilisation (MySQL).
+• Fonction de crawling pour avoir une première banque de trajets de PI
+• Interface d'administration : client Java, serveur PHP
+
+Interface Web :
+• Design de page d'administration (CSS)
+• Codage de connexion entre pages (HTML)
+• Formulaires, récupération et affichage de contenu (HTML, PHP, MySQL)
+

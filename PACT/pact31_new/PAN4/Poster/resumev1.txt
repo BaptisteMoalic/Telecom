@@ -1,0 +1,6 @@
+OnionWizz est un projet innovateur dans le guidage GPS. Deux bracelets et une application sont mis à disposition de l'utilisateur. Plutôt que d'avoir à écouter ou lire les instructions, l'utilisateur est averti directement à l'aide de vibrations émises par les bracelets. L'application sert quant à elle d'interface plus traditionnelle permettant par exemple de rentrer sa destination, ajuster les paramètres, ou rechercher un point d'intérêt à visiter. 
+
+Perspectives :
+•Recueillir des retour utilisateurs qui seront plus nombreux et en situation réelle
+•Optimiser l'espace/l'utilisation des composants pour réduire la taille des bracelets. A la même occasion, retravailler le design pour qu'il soit esthétique
+•

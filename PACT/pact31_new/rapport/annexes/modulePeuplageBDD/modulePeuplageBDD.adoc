@@ -1,0 +1,13 @@
+=== Module Peuplement de la base de données
+
+==== Description
+
+Notre application propose d'ajouter des trajets personnalisés, ainsi que des points d'intérêt ne figurant pas sur les cartes classiques. Pour que cette fonction apparaisse nécessaire à l'usager, et qu'il apprenne à s'en servir correctement, nous devons commencer par incorporer des trajets et des PI prédéfinis, de façon à ce que l'usager ait l'impression d'avoir un service déjà prêt, qu'il pourra utiliser dès les premiers instants.
+
+Ce module inclut donc la mise en place et l'utilisation d'une fonction de crawling pour récupérer points d'intérêts et trajets déjà existant sur internet. Les sources sont à trouver, mais on peut noter parmi les plus conséquentes OpenStreetMap et Google Maps. 
+Il peut également être intéressant de mettre en place un outil côté administrateur pour que l'administrateur de l'application puisse ajouter manuellement des PI et trajets (pas à destination des utilisateurs).
+
+
+==== Avancement
+
+==== Bibliographie spécifique

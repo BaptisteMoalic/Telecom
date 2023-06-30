@@ -1,0 +1,81 @@
+== Informations utiles à quelqu'un qui prendrait le projet en route
+
+* Pinout de la carte de développement "Adafruit HUZZAH32 – ESP32 Feather Board" + infos générales:
+https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/pinouts
+* Datasheet du microcontroleur "ESP32 WROOM32":
+https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32_datasheet_en.pdf
+* Datasheet pour la série des ESP32:
+https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf 
+* Dépôt GitHub pour l'ESP32 avec Arduino (informations sur le PINMAP + comment installer Arduino en anglais + exemple de codes):
+https://github.com/espressif/arduino-esp32#using-through-arduino-ide
+
+* Commencer à programmer avec Arduino:
+	** Télécharger et installer l'IDE Arduino via: https://www.arduino.cc/en/software
+	** Lancer Arduino. Ouvrir Fichier > Préférences
+	** Ajouter l'un des deux liens suivants dans URL de gestionnaire de cartes supplémentaires (si plusieurs liens les séparer par une virgule)
+		*** Stable release link: https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+		*** Development release link: https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_dev_index.json
+	** Ouvrir Outils > Type de carte > Gestionnaire de carte et installer la plateforme pour l'ESP32
+	** Une fois installée, dans Outils > Type de carte > ESP32 Arduino, sélectionner Adafruit ESP32 Feather
+	** Enfin, pour la communication USB-UART avec l'ESP, installer le driver suivant: https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers
+	Attention: bien sélectionner la version correspondant à votre OS
+
+* Autres bibliothèques utiles:
+	
+
+== Description des différentes librairies (dossier libraries)
+
+* Adafruit_NeoPixel : bibliothèque constructeur nécessaire au bon fonctionnement du bandeau LED
+* BluetoothWIZZ : bibliothèque personnalisée de gestion de toute l'interface Bluetooth
+* Button_Push : bibliothèque personnalisée pour le bouton de changement de mode
+* Constants : fichier header seul ayant pour but à terme de contenir toutes les constantes
+* ESP32_AnalogWrite : Bibliothèque tierce pour pouvoir générer des signaux PWM sur l'ESP32
+* ESP32AnalogRead : Bibliothèque tierce pour pouvoir lire les signaux analogiques sur l'ESP32
+* Leds_strip : bibliothèque pour la gestion du bandeau LED
+* Vibration_motor : bibliothèque personnalisée de commande du moteur
+* WizzPrefs : bibliothèque personnalisée pour l'enregistrement des motifs moteur dans la mémoire Flash.
+
+== Description des différents tests/programmes
+
+
+* test_bluetooth_V[X] : code pour faire communiquer en BLE l'ESP avec un appareil Android. Une feature est ajoutée pour chaque version (permet de traquer l'origine du reboot en boucle de l'ESP)
+* test_bluetooth_V0 : Transmet le niveau de batterie à l'appareil Android. Niveau de référence de la batterie à ajuster.
+* test_bluetooth_V1 : Contient un deuxième service, avec une caractéristique vide pour le moment.
+* test_bluetooth_V2 : Le service "custom" appelle une fonction de Callback qui signale l'écriture/la lecture
+* test_bluetooth_V3 : le service "custom" enregistre maintenant le motif sous forme d'une chaine de caractère. On peut écrire et lire le motif moteur.
+* test_bluetooth_V4 : le service "custom" contient 2 caractéristiques: la première qui est le motif choisi pour modifier, et le deuxième la modification que l'on souhaite apporter (écriture seule)
+* test_bluetooth_V5 : les motifs sont maintenant sotckés sur la mémoire Flash.
+* test_bluetooth_V6 : code partitionné. On peut maintenant demander à l'ESP de jouer un motif particulier.
+* test_btn_interruption : permet d'utiliser un bouton pour changer des modes de fonctionnement.
+* test_demo_pan2_with_lib: regroupe la totalité des fonctionnalité à la date du 10/02, avec un code sous forme de modules.
+* test_led_embarquee: fait clignoter la led embarquée (rouge, à coté du port USB), allumée 0.5sec puis éteinte 0.5sec, en boucle
+* test_motif_moteur : joue un motif moteur de 5 secondes toutes les 3 secondes, en utilisant la librairie personnalisée "Vibration_motor"
+* test_print : simple test où la carte envoie par la liaison usb/série le message "Print chaque demi-seconde" en boucle
+* test_stockage : enregistre un motif moteur sur la mémoire flash de l'ESP, pour pouvoir y accéder même après rallumage.
+* test_stockage_multiple : enregistre deux motifs moteur sur la mémoire flash de l'ESP (test du fonctionnement de l'espace de nom)
+* test_stockage_clear : efface tout ce qui a été stocké dans la mémoire Flash par test_stockage ou test_stockage_multiple
+* test_vibration_motor_max_min : test de commande du moteur en tout ou rien.
+* test_vibration_motor_pwm : code pour commander le moteur vibrant avec une commande de tension variable (PWM).
+* test_vibration_motor_pwm_func_with_lib: comme le code précédent, mais cette fois avec les fonctions de gestion du moteur dans la bibliothèque Vibration_motor.
+* WIP/bracelet : module qui contiendrait tout à terme.
+
+== Tests matériel (pour le module test et intégration)
+
+=== 1 seul bracelet
+
+- Tester la communication
+- S'assurer qu'un message inattendu ne fait pas planter le bracelet (erreur ignorée côté bracelet, application informée?)
+- Une erreur doit être levée si le bracelet se retrouve déconnecté inopinément de l'application pendant un guidage (affichage rouge sur le bracelet, vibration particulière? et notification sur le téléphone)  -> critère pour définir la déconnexion?
+- Vérifier que les motifs vibratoires sont bien reproduits
+- Vérifier que les DEL sur le bracelet indiquent ce qu'il faut
+
+=== 2 bracelets
+
+- vérifier que l'attribution gauche/droite est bien faite
+
+
+== Tests d'informations en provenance de codage navigation
+
+- vérifier que les motifs de vibration sont bien transmis/mémorisés
+- vérifier que les instructions de déplacement sont converties dans les bons ordres et motifs de vibration
+	

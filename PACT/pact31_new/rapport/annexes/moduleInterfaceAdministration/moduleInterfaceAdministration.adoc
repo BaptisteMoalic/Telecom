@@ -1,0 +1,12 @@
+=== Module Interface Web d'Administration
+
+==== Description
+
+Afin d'administrer notre application (gérer les comptes usagers par exemple), de récupérer les précieuses données des utilisateurs (dans le but de proposer des itinéraires plus réalistes, et de pouvoir optimiser les fonctions les plus utilisées) et les mettre en forme de façon à pouvoir les présenter au public/exploitants, nous devons créer une interface d'administration pour faciliter ces démarches.
+
+Il a été décidé que l'interface d'administration serait une page Web. Il faudra la coder, voir comment extraire les données et s'interroger sur comment les exploiter au service de l'application.
+
+
+==== Avancement
+
+==== Bibliographie spécifique

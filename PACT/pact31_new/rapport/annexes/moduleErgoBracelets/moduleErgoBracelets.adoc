@@ -1,0 +1,162 @@
+=== Module Ergonomie
+
+==== Description
+
+Le travail dans le module d'ergonomie est le suivant :
+
+* Pour guider retransmettre des instructions GPS par le biais de vibrations, il faut créer un véritable dictionnaire pour chaque mode de transport liant instructions et motifs de vibrations.
+
+* Au-delà de créer ces dictionnaires, il faut que les motifs de vibrations soient pertinents et compréhensibles par les utilisateurs, ce qui nous amènera à les tester aussi tôt que possible d'abord en laboratoire, puis en situation.
+
+* Il faut créer des bracelets simple d'utilisation et non-intrusif. Ce module est  donc également lié à celui de réalisation des bracelets sur le plan technique (dimension, poids ...)
+
+==== Avancement
+
+===== 17/11 : Réunion avec Stéphane Safin
+
+Sujets abordés : pertinence du bracelet, nécessité d'établir un vocabulaire, importance des test/simulations (à faire le plus vite possible), la fonction points d'intérêts est-elle vraiment utile? Par quel moyen transmettre cette information sinon? Et comment les modes communiquent entre eux.
+Des notes de compte rendu sont disponibles dans le dossier, mais les points suivants ressortent de la réunion :
+
+* Réfléchir à un autre format que le bracelet vibrant. Ce format a été sélectionné car c'est ce qui vient à l'esprit en premier, mais le sujet n'a pas été beaucoup plus creusé mis à part pour justifier notre choix de sujet (voix du GPS agaçante, ne pas avoir à regarder autre chose que la route)
+
+* Il faut bien réfléchir à toutes les instructions possibles qu'un gps doit donner pour avoir une idée de la quantité d'information et d'instructions à traduire. Cela peut être estimé facilement en activant un GPS pour tous nos prochains déplacement sur une période de temps moyenne.
+
+* Comme il faut que les instructions soient retransmises de manières pertinentes, il va falloir simuler le fonctionnement aussi rapidement que possible. Nou devons donc simuler des instructions et vérifier leur compréhension aussi vite que possible afin d'ajuster les motifs de vibration si besoin ou mêême de considérer une modification de noter mode de retour (bracelets -> manchons). Il faudra également considérer des tests en laboratoire et / puis en situation.
+
+* [Réflexion faite avant / ayant mené à la modification de cette fonctionnalité] Le changement de mode comme il est maintenant est-il vraiment utile ? Par exemple, autant mettre un parking dès le départ comme destination. Il faut réfléchir à la plus-value de chaque partie du projet.
+
+* Il faut se replonger de façon générale dans le scénario pour voir ce qu'on apporte en plus d'un gps classique. On nous a notamment proposé d'abandonner l'utilisation d'Onion wizz pour des voitures car on a d'excellent gps et les déplacements sont plus compliqués. Cette décision reste à prendre, mais ajouter un mode de transport plus tard est une tâche parfaitement abordable si le reste fonctionne comme nous le souhaitons. La question restera donc sûrement ouverte.
+
+===== 02/12 : Première liste d'instructions
+
+Une première liste d'instructions GPS potentielles a été réalisée. Ces instructions sont regroupées par nature. Une discussion a également été tenue à propos de l'utilisation des LEDs et du bouton. La possibilité d'utiliser un deuxième bouton suite à la précision des fonctionnalités liées aux points d'intérêts a été évoquée. L'introduction d'une action pour "redemander" l'instruction en cas de doute est également en cours d'étude.
+
+Commentaires associés au tableau :
+
+* Les instructions de virages sont restreintes à une direction pour la lisibilité. Il y aura bien évidemment des instructions pour l'autre direction.
+
+* Les instructions suivies d'un "?" sont hypothétiques. Il faut évaluer les possibilités techniques pour la transcription et/ou leur pertinence.
+
+* On peut également regrouper ces instructions GPS selon ce que l'on doit réussir à retranscrire, à savoir des alertes, des orientations ou des chiffres. D'ailleurs, ce regroupement sera peut-être plus pertinent lors du développement ds signaux vibrants correspondants.
+
+[cols=",^,^,^",options="header",]
+|====
+|Destination & PI|Virages|Directions & sorties|Rond-points
+| - Arrivée à destination
+
+- PI à proximité
+
+- Demi-tour (suite à une erreur)
+
+| - Aller tout droit
+
+- N-ième à droite
+
+- Tourner à droite
+
+- Tourner à droite (imminent)
+
+- Tourner à droite (en épingle)
+
+- Tourner à droite (~90°)
+
+- Tourner à droite (légèr)
+
+| - N-ième sortie
+
+- Suivre une direction ?
+
+- Continuer sur la voie principale
+
+- Ralentir
+
+| - N-ième sortie (en amont)
+
+- Prochaine sortie (imminent) ?
+
+- Repartir de là d'où l'on vient
+
+|====
+
+
+===== 06/01 : Précision des motifs de vibration, et autres questions d'Ergonomie
+
+Durant cette séance, nous avons continué à préciser les motifs pour les vibrations et nous nous sommes posés d'autres questions, notamment sur comment montrer l'état de la batterie, et comment signifier à l'usager si sa batterie devient faible au cours du trajet.
+Le compte-rendu complet se trouve dans le dossier moduleErgoBracelets de l'annexe. Ci-dessous, une liste des motifs que nous avons gardés :
+
+image::../images/tableau_instruction_vibration.png[tableau vibra]
+
+////
+
+ ancien tableau
+[%header,cols=3*]
+|===
+|Instruction
+|Motif
+|Intensité
+
+|Aller tout droit
+|Vibration des deux bracelets
+|A déterminer
+
+|Sortir à la n-ième sortie (rond-point)
+|n vibrations des deux bracelets
+|1
+
+|Sortir à la n-ième intersection (axe principal)
+|n vibration du bracelet de la direction, précédées d'une légère vibration des deux bracelets
+|3 pour la première vibration et 1 pour les n
+
+|Ralentir
+|x vibrations gauche-droite alternées
+|2
+
+|Arrivé à destination/PI
+|Motif spécial à définir
+|1
+
+|Serrer à gauche/droite
+|Longue vibration du bracelet de la direction
+|2
+
+|Tourner à gauche/droite
+|Vibration du bracelet de la direction
+|1
+
+|Demi-tour à un rond-point
+|Longue vibration des deux bracelets
+|1
+|===
+
+
+////
+
+
+===== 20/01 : Ajustements et précisions de problématiques
+
+Le tableau des instructions-vibrations a été modifié pour inclure une directive oubliée : le demi-tour au niveau d'un rond-point. Nous avons jugé que cette instruction était nécessaire puisque l'utilisateur pourrait être confu si le numéro de la sortie à prendre indiquait celle dont il venait.
+
+En ce qui concerne la problématique de la batterie, l'API utilisée possède une requête "Calculate Reachable Range" qui prend en argument la batterie ou le carburant (voir d'autre paramètre comme la vitesse de déplacement...) et renvoie la distance maximale que l'on peut atteindre avec ce niveau de batterie / carburant. Il devrait donc être possible d'avertir l'utilisateur comme mentionné dans le bilan de la séance précédente.
+
+
+===== 10/02 : Visite du FabLab avec Mickaël Bouhier
+
+Nous avons visité le FabLab pour y découvrir les matériaux et les processus possibles pour fabriquer nos bracelets. Le compte-rendu de cette visite est disponible link:CR_10-02.adoc[ici^]
+
+
+===== 11/02 : PAN2 avec Stéphane Safin
+
+* Les slides de présentation sont disponibles link:rapport/annexes/moduleErgoBracelets/Slides_PAN2.pdf[ici^], et le rapport d'avancement link:rapport/annexes/moduleErgoBracelets/Rapport_PAN2.pdf[ici^]
+
+* Fixer un scénario : s'intéresse-t-on uniquement à des gens à pied, ou à vélo?
+
+* Il faut tester le plus vite possible, car c'est très pénible de revenir en arrière. Produire un rapport de test. Deux tests sont à effectuer :
+1. Discrimination des éléments : l'utilisateur ressent-il bien les vibrations? Est-il capable de distinguer par exemple deux vibrations courtes d'une vibration longue?
+2. Lien commande/action à réaliser : l'utilisateur comprend-il l'action qu'il a à réaliser lorsque ses bracelets vibrent en même temps par exemple?
+
+* On peut imaginer que les bracelets servent pour une course d'orientation exclusive (nouveau sport?)
+
+
+
+
+==== Bibliographie spécifique
